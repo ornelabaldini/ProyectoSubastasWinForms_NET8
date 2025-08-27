@@ -38,12 +38,12 @@ namespace ProyectoSubastasWinForms_NET8.Repository
             return null;
         }
 
-        public void Agregar(Postor postor)
+        public void AgregarPostor(Postor postor)
         {
             postores.Add(postor);
         }
 
-        public void Modificar(Postor postor)
+        public void ModificarPostor(Postor postor)
         {
             for (int i = 0; i < postores.Count; i++)
             {
@@ -56,7 +56,7 @@ namespace ProyectoSubastasWinForms_NET8.Repository
             }
         }
 
-        public void Eliminar(int dni)
+        public void EliminarPostor(int dni)
         {
             int indice = -1;
             for (int i = 0; i < postores.Count; i++)

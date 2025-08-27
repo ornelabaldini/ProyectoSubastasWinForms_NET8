@@ -57,18 +57,18 @@ namespace ProyectoSubastasWinForms_NET8.Views
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridView1.CurrentRow == null) return;
-            Cliente c = dataGridView1.CurrentRow.DataBoundItem as Postor;
-            if (c == null) return;
-            txtDni.Text = c.Dni.ToString();
-            txtNombre.Text = c.Nombre;
-            txtApellido.Text = c.Apellido;
+            Postor p = dataGridView1.CurrentRow.DataBoundItem as Postor;
+            if (p == null) return;
+            txtDni.Text = p.Dni.ToString();
+            txtNombre.Text = p.Nombre;
+            txtApellido.Text = p.Apellido;
         }
 
         private void ActualizarGrid()
         {
-            List<Postor> clientes = controller.ObtenerPostor();
+            List<Postor> postores = controller.ObtenerPostores();
             dataGridView1.DataSource = null;
-            dataGridView1.DataSource = clientes;
+            dataGridView1.DataSource = postores;
         }
     }
 }

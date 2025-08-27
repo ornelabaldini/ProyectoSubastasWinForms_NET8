@@ -25,7 +25,7 @@ namespace ProyectoSubastasWinForms_NET8.Services
             {
                 return false;
             }
-            repository.Agregar(postor);
+            repository.AgregarPostor(postor);
             return true;
         }
 
@@ -36,18 +36,18 @@ namespace ProyectoSubastasWinForms_NET8.Services
             {
                 return false;
             }
-            repository.Modificar(postor);
+            repository.ModificarPostor(postor);
             return true;
         }
 
-        public bool Eliminar(int dni)
+        public bool EliminarPostor(int dni)
         {
             Postor existente = repository.ObtenerPorDni(dni);
             if (existente == null)
             {
                 return false;
             }
-            repository.Eliminar(dni);
+            repository.EliminarPostor(dni);
             return true;
         }
     }
