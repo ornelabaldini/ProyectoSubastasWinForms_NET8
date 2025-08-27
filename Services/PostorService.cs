@@ -1,12 +1,54 @@
-﻿using System;
+﻿using ProyectoSubastasWinForms_NET8.Models;
+using ProyectoSubastasWinForms_NET8.Repository;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProyectoSubastasWinForms_NET8.Services
 {
-    internal class PostorService
+    public class PostorService
     {
+        private readonly PostorRepository repository;
+
+        public PostorService()
+        {
+            repository = new PostorRepository();
+        }
+
+        public List<Postor> ObtenerPostores()
+        {
+            return repository.ObtenerTodos();
+        }
+
+        public bool CrearPostor(Postor postor)
+        {
+            Postor existente = repository.ObtenerPorDni(postor.Dni);
+            if (existente != null)
+            {
+                return false;
+            }
+            repository.Agregar(postor);
+            return true;
+        }
+
+        public bool ModificarPostor(Postor postor)
+        {
+            Postor existente = repository.ObtenerPorDni(postor.Dni);
+            if (existente == null)
+            {
+                return false;
+            }
+            repository.Modificar(postor);
+            return true;
+        }
+
+        public bool Eliminar(int dni)
+        {
+            Postor existente = repository.ObtenerPorDni(dni);
+            if (existente == null)
+            {
+                return false;
+            }
+            repository.Eliminar(dni);
+            return true;
+        }
     }
 }

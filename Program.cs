@@ -2,7 +2,7 @@ using System;
 using System.Windows.Forms;
 using ProyectoSubastasWinForms_NET8.Views;
 
-namespace ProyectoSubastasWinForms
+namespace ProyectoSubastasWinForms_NET8
 {
     internal static class Program
     {
