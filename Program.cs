@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Windows.Forms;
 using ProyectoSubastasWinForms_NET8.Views;
 
@@ -9,7 +10,9 @@ namespace ProyectoSubastasWinForms_NET8
         [STAThread]
         static void Main()
         {
-            // Inicialización clásica para evitar dependencias de ApplicationConfiguration (plantilla VS)
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("es-AR");
+            CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("es-AR");
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
