@@ -6,9 +6,13 @@
         public string Nombre { get; set; }
         public string Apellido { get; set; }
 
-        public override string ToString()
+        public string NombreCompleto => $"{Nombre} {Apellido}";
+
+        public Postor(int dni, string nombre, string apellido)
         {
-            return Dni + " - " + Apellido + ", " + Nombre;
+            Dni = dni;
+            Nombre = nombre;
+            Apellido = apellido;
         }
     }
 }
