@@ -25,136 +25,145 @@
 
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.txtDni = new System.Windows.Forms.TextBox();
-            this.txtNombre = new System.Windows.Forms.TextBox();
-            this.txtApellido = new System.Windows.Forms.TextBox();
-            this.btnAgregar = new System.Windows.Forms.Button();
-            this.btnModificar = new System.Windows.Forms.Button();
-            this.btnEliminar = new System.Windows.Forms.Button();
-            this.lblDni = new System.Windows.Forms.Label();
-            this.lblNombre = new System.Windows.Forms.Label();
-            this.lblApellido = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.SuspendLayout();
+            dataGridView1 = new DataGridView();
+            txtDni = new TextBox();
+            txtNombre = new TextBox();
+            txtApellido = new TextBox();
+            btnAgregar = new Button();
+            btnModificar = new Button();
+            btnEliminar = new Button();
+            lblDni = new Label();
+            lblNombre = new Label();
+            lblApellido = new Label();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            SuspendLayout();
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.Location = new System.Drawing.Point(12, 140);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(560, 240);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView1.ColumnHeadersHeight = 29;
+            dataGridView1.Location = new Point(14, 187);
+            dataGridView1.Margin = new Padding(3, 4, 3, 4);
+            dataGridView1.MultiSelect = false;
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
+            dataGridView1.RowHeadersVisible = false;
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.Size = new Size(640, 320);
+            dataGridView1.TabIndex = 0;
+            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
             // 
             // txtDni
             // 
-            this.txtDni.Location = new System.Drawing.Point(80, 12);
-            this.txtDni.Name = "txtDni";
-            this.txtDni.PlaceholderText = "DNI";
-            this.txtDni.Size = new System.Drawing.Size(200, 23);
-            this.txtDni.TabIndex = 1;
+            txtDni.Location = new Point(91, 16);
+            txtDni.Margin = new Padding(3, 4, 3, 4);
+            txtDni.Name = "txtDni";
+            txtDni.PlaceholderText = "DNI";
+            txtDni.Size = new Size(228, 27);
+            txtDni.TabIndex = 1;
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(80, 41);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.PlaceholderText = "Nombre";
-            this.txtNombre.Size = new System.Drawing.Size(200, 23);
-            this.txtNombre.TabIndex = 2;
+            txtNombre.Location = new Point(91, 55);
+            txtNombre.Margin = new Padding(3, 4, 3, 4);
+            txtNombre.Name = "txtNombre";
+            txtNombre.PlaceholderText = "Nombre";
+            txtNombre.Size = new Size(228, 27);
+            txtNombre.TabIndex = 2;
             // 
             // txtApellido
             // 
-            this.txtApellido.Location = new System.Drawing.Point(80, 70);
-            this.txtApellido.Name = "txtApellido";
-            this.txtApellido.PlaceholderText = "Apellido";
-            this.txtApellido.Size = new System.Drawing.Size(200, 23);
-            this.txtApellido.TabIndex = 3;
+            txtApellido.Location = new Point(91, 93);
+            txtApellido.Margin = new Padding(3, 4, 3, 4);
+            txtApellido.Name = "txtApellido";
+            txtApellido.PlaceholderText = "Apellido";
+            txtApellido.Size = new Size(228, 27);
+            txtApellido.TabIndex = 3;
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(310, 12);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(90, 23);
-            this.btnAgregar.TabIndex = 4;
-            this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            btnAgregar.Location = new Point(354, 16);
+            btnAgregar.Margin = new Padding(3, 4, 3, 4);
+            btnAgregar.Name = "btnAgregar";
+            btnAgregar.Size = new Size(103, 31);
+            btnAgregar.TabIndex = 4;
+            btnAgregar.Text = "Agregar";
+            btnAgregar.UseVisualStyleBackColor = true;
+            btnAgregar.Click += btnAgregar_Click;
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(310, 41);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(90, 23);
-            this.btnModificar.TabIndex = 5;
-            this.btnModificar.Text = "Modificar";
-            this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            btnModificar.Location = new Point(354, 55);
+            btnModificar.Margin = new Padding(3, 4, 3, 4);
+            btnModificar.Name = "btnModificar";
+            btnModificar.Size = new Size(103, 31);
+            btnModificar.TabIndex = 5;
+            btnModificar.Text = "Modificar";
+            btnModificar.UseVisualStyleBackColor = true;
+            btnModificar.Click += btnModificar_Click;
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(310, 70);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(90, 23);
-            this.btnEliminar.TabIndex = 6;
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = true;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            btnEliminar.Location = new Point(354, 93);
+            btnEliminar.Margin = new Padding(3, 4, 3, 4);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(103, 31);
+            btnEliminar.TabIndex = 6;
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // lblDni
             // 
-            this.lblDni.AutoSize = true;
-            this.lblDni.Location = new System.Drawing.Point(12, 15);
-            this.lblDni.Name = "lblDni";
-            this.lblDni.Size = new System.Drawing.Size(27, 15);
-            this.lblDni.TabIndex = 7;
-            this.lblDni.Text = "DNI";
+            lblDni.AutoSize = true;
+            lblDni.Location = new Point(14, 20);
+            lblDni.Name = "lblDni";
+            lblDni.Size = new Size(35, 20);
+            lblDni.TabIndex = 7;
+            lblDni.Text = "DNI";
             // 
             // lblNombre
             // 
-            this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(12, 44);
-            this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(51, 15);
-            this.lblNombre.TabIndex = 8;
-            this.lblNombre.Text = "Nombre";
+            lblNombre.AutoSize = true;
+            lblNombre.Location = new Point(14, 59);
+            lblNombre.Name = "lblNombre";
+            lblNombre.Size = new Size(64, 20);
+            lblNombre.TabIndex = 8;
+            lblNombre.Text = "Nombre";
             // 
             // lblApellido
             // 
-            this.lblApellido.AutoSize = true;
-            this.lblApellido.Location = new System.Drawing.Point(12, 73);
-            this.lblApellido.Name = "lblApellido";
-            this.lblApellido.Size = new System.Drawing.Size(51, 15);
-            this.lblApellido.TabIndex = 9;
-            this.lblApellido.Text = "Apellido";
+            lblApellido.AutoSize = true;
+            lblApellido.Location = new Point(14, 97);
+            lblApellido.Name = "lblApellido";
+            lblApellido.Size = new Size(66, 20);
+            lblApellido.TabIndex = 9;
+            lblApellido.Text = "Apellido";
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 391);
-            this.Controls.Add(this.lblApellido);
-            this.Controls.Add(this.lblNombre);
-            this.Controls.Add(this.lblDni);
-            this.Controls.Add(this.btnEliminar);
-            this.Controls.Add(this.btnModificar);
-            this.Controls.Add(this.btnAgregar);
-            this.Controls.Add(this.txtApellido);
-            this.Controls.Add(this.txtNombre);
-            this.Controls.Add(this.txtDni);
-            this.Controls.Add(this.dataGridView1);
-            this.Name = "MainForm";
-            this.Text = "Gestión de Subastas (.NET 8 WinForms)";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(667, 521);
+            Controls.Add(lblApellido);
+            Controls.Add(lblNombre);
+            Controls.Add(lblDni);
+            Controls.Add(btnEliminar);
+            Controls.Add(btnModificar);
+            Controls.Add(btnAgregar);
+            Controls.Add(txtApellido);
+            Controls.Add(txtNombre);
+            Controls.Add(txtDni);
+            Controls.Add(dataGridView1);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "MainForm";
+            Text = "Gestor de Subastas";
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
     }
 }
