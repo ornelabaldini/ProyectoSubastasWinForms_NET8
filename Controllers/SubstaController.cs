@@ -27,9 +27,38 @@ namespace ProyectoSubastasWinForms_NET8.Controllers
             if (!s.Postores.Contains(p))
                 throw new InvalidOperationException("El postor no pertenece a esta subasta.");
 
- 
+            decimal pujaActual = s.ObtenerPujaActual();
+
+            if (monto < pujaActual + s.Incremento)
+                throw new InvalidOperationException($"La puja debe ser al menos {pujaActual + s.Incremento:C}.");
+
             var nuevaPuja = new Puja(p, monto);
             s.AgregarPuja(nuevaPuja);
+        }
+
+        public void ActualizarEstadoSubastas()
+        {
+            DateTime ahora = DateTime.Now;
+            foreach (var subasta in subastas)
+            {
+                if (subasta.Estado == SubastaEstado.Finalizada)
+                    continue;
+
+                DateTime finSubasta = subasta.FechaInicio.Add(subasta.Duracion);
+
+                if (ahora >= finSubasta)
+                {
+                    subasta.Estado = SubastaEstado.Finalizada;
+                }
+                else if (ahora >= subasta.FechaInicio)
+                {
+                    subasta.Estado = SubastaEstado.EnCurso;
+                }
+                else
+                {
+                    subasta.Estado = SubastaEstado.Pendiente;
+                }
+            }
         }
 
     }

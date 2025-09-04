@@ -12,7 +12,7 @@ namespace ProyectoSubastasWinForms_NET8.Models
         public decimal PujaInicial { get; set; }
         public decimal Incremento { get; set; }
         public TimeSpan Duracion { get; set; }
-        public SubastaEstado Estado { get; private set; }
+        public SubastaEstado Estado { get; set; }
         public DateTime FechaInicio { get; private set; }
         public DateTime FechaFin { get; private set; }
         public List<Puja> PujaList { get; private set; }

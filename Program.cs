@@ -1,7 +1,9 @@
+using ProyectoSubastasWinForms_NET8.Controllers;
+using ProyectoSubastasWinForms_NET8.Models;
+using ProyectoSubastasWinForms_NET8.Views;
 using System;
 using System.Globalization;
 using System.Windows.Forms;
-using ProyectoSubastasWinForms_NET8.Views;
 
 namespace ProyectoSubastasWinForms_NET8
 {
@@ -15,7 +17,9 @@ namespace ProyectoSubastasWinForms_NET8
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+
+            // Iniciar con LoginForm
+            Application.Run(new LoginForm());
         }
     }
 }
