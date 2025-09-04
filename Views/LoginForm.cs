@@ -17,6 +17,13 @@ namespace ProyectoSubastasWinForms_NET8.Views
         public LoginForm()
         {
             InitializeComponent();
+            // Quitar el foco inicial del TextBox para que se vea el PlaceholderText
+            Button invisibleButton = new Button();
+            invisibleButton.Size = new Size(0, 0);
+            invisibleButton.Location = new Point(-100, -100); // fuera de la vista
+            this.Controls.Add(invisibleButton);
+            this.ActiveControl = invisibleButton;
+
         }
 
         private void btnContinuar_Click(object sender, EventArgs e)

@@ -41,7 +41,7 @@
             lblBienvenido.Location = new Point(239, 38);
             lblBienvenido.Name = "lblBienvenido";
             lblBienvenido.Size = new Size(278, 25);
-            lblBienvenido.TabIndex = 0;
+            lblBienvenido.TabIndex = 1;
             lblBienvenido.Text = "Bienvenid@ al gestor de subastas";
             // 
             // txtNombre
@@ -50,7 +50,7 @@
             txtNombre.Name = "txtNombre";
             txtNombre.PlaceholderText = "Nombre";
             txtNombre.Size = new Size(150, 31);
-            txtNombre.TabIndex = 1;
+            txtNombre.TabIndex = 2;
             // 
             // txtApellido
             // 
@@ -58,14 +58,14 @@
             txtApellido.Name = "txtApellido";
             txtApellido.PlaceholderText = "Apellido";
             txtApellido.Size = new Size(150, 31);
-            txtApellido.TabIndex = 2;
+            txtApellido.TabIndex = 3;
             // 
             // btnContinuar
             // 
             btnContinuar.Location = new Point(296, 253);
             btnContinuar.Name = "btnContinuar";
-            btnContinuar.Size = new Size(112, 34);
-            btnContinuar.TabIndex = 3;
+            btnContinuar.Size = new Size(112, 54);
+            btnContinuar.TabIndex = 5;
             btnContinuar.Text = "Continuar";
             btnContinuar.UseVisualStyleBackColor = true;
             btnContinuar.Click += btnContinuar_Click;
