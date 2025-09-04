@@ -26,30 +26,47 @@ namespace ProyectoSubastasWinForms_NET8.Views
             {
                 listBoxSubastas.Items.Add(s);
             }
+            lblGanadorActual.Text = "Ganador actual: -";
+            comboPostores.Items.Clear();
         }
 
         private void btnNuevaSubasta_Click(object sender, EventArgs e)
         {
-            Subasta s = new Subasta
-            {
-                NombreSubastador = txtSubastador.Text,
-                Articulo = txtArticulo.Text,
-                Pujainicial = numericPujaInicial.Value,
-                PujadeAumento = numericPujaAumento.Value,
-                Fecha = dateTimePickerFecha.Value,
-                Duracion = TimeSpan.FromMinutes((double)numericDuracion.Value)
-            };
+            int nuevoId = controller.ObtenerNuevoId();
+
+            var s = new Subasta(
+                nuevoId,
+                txtArticulo.Text,
+                txtSubastador.Text,
+                numericPujaInicial.Value,
+                numericPujaAumento.Value,
+                TimeSpan.FromMinutes((double)numericDuracion.Value)
+            );
+
             controller.AgregarSubasta(s);
             CargarSubastas();
         }
 
         private void listBoxSubastas_SelectedIndexChanged(object sender, EventArgs e)
         {
+            comboPostores.Items.Clear();
+            lblGanadorActual.Text = "Ganador actual: -";
+
             if (listBoxSubastas.SelectedItem is Subasta s)
             {
-                comboPostores.Items.Clear();
-                foreach (var p in s.Postores)
-                    comboPostores.Items.Add(p);
+                if (s.Postores != null)
+                {
+                    foreach (var p in s.Postores)
+                        comboPostores.Items.Add(p);
+                }
+
+                var pujaActual = s.ObtenerPujaActual();
+                var ganador = s.ObtenerPostorGanador();
+
+                if (ganador != null)
+                {
+                    lblGanadorActual.Text = $"Ganador actual: {ganador.Nombre} {ganador.Apellido} - ${pujaActual:0.00}";
+                }
             }
         }
 
@@ -58,6 +75,7 @@ namespace ProyectoSubastasWinForms_NET8.Views
             if (listBoxSubastas.SelectedItem is Subasta s)
             {
                 new GestionPostoresForm(s).ShowDialog();
+                // Después de gestionar postores, refrescamos lista y combo
                 listBoxSubastas_SelectedIndexChanged(null, null);
             }
         }
@@ -67,8 +85,27 @@ namespace ProyectoSubastasWinForms_NET8.Views
             if (listBoxSubastas.SelectedItem is Subasta s &&
                 comboPostores.SelectedItem is Postor p)
             {
-                controller.RegistrarPuja(s, p, numericMonto.Value);
+                try
+                {
+                    controller.RegistrarPuja(s, p, numericMonto.Value);
+                    MessageBox.Show("Puja registrada correctamente.");
+                    // Actualizamos la etiqueta ganador después de registrar la puja
+                    listBoxSubastas_SelectedIndexChanged(null, null);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al registrar puja: {ex.Message}");
+                }
             }
+            else
+            {
+                MessageBox.Show("Selecciona una subasta y un postor válidos.");
+            }
+        }
+
+        private void numericPujaInicial_ValueChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

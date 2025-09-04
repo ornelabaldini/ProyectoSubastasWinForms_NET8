@@ -30,8 +30,9 @@ namespace ProyectoSubastasWinForms_NET8.Views
 
             string nombre = txtNombre.Text.Trim();
             string apellido = txtApellido.Text.Trim();
+            string email = txtEmail.Text.Trim();
 
-            bool ok = postorController.AgregarPostor(dni, nombre, apellido);
+            bool ok = postorController.AgregarPostor(dni, nombre, apellido, email);
             if (!ok)
             {
                 MessageBox.Show("Ya existe un postor con ese DNI.");
@@ -50,8 +51,9 @@ namespace ProyectoSubastasWinForms_NET8.Views
 
             string nombre = txtNombre.Text.Trim();
             string apellido = txtApellido.Text.Trim();
+            string email = txtEmail.Text.Trim();
 
-            bool ok = postorController.ModificarPostor(dni, nombre, apellido);
+            bool ok = postorController.ModificarPostor(dni, nombre, apellido, email);
             if (!ok)
             {
                 MessageBox.Show("Postor no encontrado.");
@@ -90,6 +92,7 @@ namespace ProyectoSubastasWinForms_NET8.Views
                 txtDni.Text = "";
                 txtNombre.Text = "";
                 txtApellido.Text = "";
+                txtEmail.Text = "";
             }
         }
 
@@ -97,6 +100,18 @@ namespace ProyectoSubastasWinForms_NET8.Views
         {
             dataGridView1.DataSource = null;
             dataGridView1.DataSource = postores;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAbrirSubasta_Click(object sender, EventArgs e)
+        {
+            var subastaController = new SubastaController();
+            var subastaForm = new SubastaForm(subastaController, postores);
+            subastaForm.Show();
         }
     }
 }

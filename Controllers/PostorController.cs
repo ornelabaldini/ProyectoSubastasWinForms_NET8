@@ -7,23 +7,24 @@ namespace ProyectoSubastasWinForms_NET8.Controllers
     {
         private List<Postor> postores = new List<Postor>();
 
-        public bool AgregarPostor(int dni, string nombre, string apellido)
+        public bool AgregarPostor(int dni, string nombre, string apellido, string email)
         {
             if (postores.Exists(p => p.Dni == dni))
                 return false;
 
-            Postor p = new Postor(dni, nombre, apellido);
+            Postor p = new Postor(dni, nombre, apellido, email);
             postores.Add(p);
             return true;
         }
 
-        public bool ModificarPostor(int dni, string nombre, string apellido)
+        public bool ModificarPostor(int dni, string nombre, string apellido, string email)
         {
             Postor p = postores.Find(x => x.Dni == dni);
             if (p == null) return false;
 
             p.Nombre = nombre;
             p.Apellido = apellido;
+            p.Email = email;
             return true;
         }
 

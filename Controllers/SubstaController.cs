@@ -8,6 +8,11 @@ namespace ProyectoSubastasWinForms_NET8.Controllers
         private List<Subasta> subastas = new List<Subasta>();
 
         public List<Subasta> ObtenerSubastas() => subastas;
+        public int ObtenerNuevoId()
+        {
+            if (subastas.Count == 0) return 1;
+            return subastas.Max(s => s.Id) + 1;
+        }
 
         public void AgregarSubasta(Subasta s)
         {
@@ -16,13 +21,18 @@ namespace ProyectoSubastasWinForms_NET8.Controllers
 
         public void RegistrarPuja(Subasta s, Postor p, decimal monto)
         {
-            if (!s.Postores.Contains(p)) return;
+            if (s.Estado != SubastaEstado.EnCurso)
+                throw new InvalidOperationException("La subasta no está en curso.");
 
-            if (monto >= s.Pujainicial && monto > s.OfertaGanadora)
-            {
-                s.OfertaGanadora = monto;
-                s.Ganador = p;
-            }
+            if (!s.Postores.Contains(p))
+                throw new InvalidOperationException("El postor no pertenece a esta subasta.");
+
+ 
+            var nuevaPuja = new Puja(p, monto);
+            s.AgregarPuja(nuevaPuja);
         }
+
     }
+
 }
+

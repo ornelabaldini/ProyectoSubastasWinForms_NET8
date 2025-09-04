@@ -16,6 +16,10 @@ namespace ProyectoSubastasWinForms_NET8.Models
         public DateTime FechaInicio { get; private set; }
         public DateTime FechaFin { get; private set; }
         public List<Puja> PujaList { get; private set; }
+        public List<Postor> Postores { get; set; } = new List<Postor>();
+        public Postor Ganador { get; set; }
+
+
 
         public Subasta(int id, string articulo, string subastador, decimal pujaInicial, decimal incremento, TimeSpan duracion)
         {
@@ -27,6 +31,7 @@ namespace ProyectoSubastasWinForms_NET8.Models
             Duracion = duracion;
             Estado = SubastaEstado.Pendiente;
             PujaList = new List<Puja>();
+            Postores = new List<Postor>();
         }
 
         public void Iniciar()
@@ -67,5 +72,20 @@ namespace ProyectoSubastasWinForms_NET8.Models
 
             return PujaList.OrderByDescending(p => p.Monto).First();
         }
+        public Puja OfertaGanadora => CalcularGanador();
+
+        public decimal ObtenerPujaActual()
+        {
+            var ganadora = CalcularGanador();
+            return ganadora != null ? ganadora.Monto : PujaInicial;
+        }
+
+        public Postor ObtenerPostorGanador()
+        {
+            var ganadora = CalcularGanador();
+            return ganadora != null ? ganadora.Postor : null;
+        }
+
+
     }
 }
