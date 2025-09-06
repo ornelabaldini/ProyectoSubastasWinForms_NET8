@@ -19,9 +19,35 @@ namespace ProyectoSubastasWinForms_NET8.Views
             subastadorActual = subastador;
 
             InitializeComponent();
+            txtArticulo.KeyDown += Control_KeyDown;
+            txtSubastador.KeyDown += Control_KeyDown;
+            numericPujaInicial.KeyDown += Control_KeyDown;
+            numericPujaAumento.KeyDown += Control_KeyDown;
+            numericDuracion.KeyDown += Control_KeyDown;
+
+
             CargarSubastas();
             CargarSubastadorSiExiste();
         }
+
+        private void Control_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+
+                // Mover el foco al siguiente control
+                this.SelectNextControl(
+                    (Control)sender, // Control actual
+                    true,            // buscar hacia adelante
+                    true,            // saltar controles no tabulables
+                    true,            // saltar controles hijos
+                    true             // saltar controles invisibles
+                );
+            }
+        }
+
         private void CargarSubastadorSiExiste()
         {
             if (subastadorActual != null)
@@ -86,6 +112,12 @@ namespace ProyectoSubastasWinForms_NET8.Views
                         comboPostores.Items.Add(p);
                 }
 
+                //Si hay postores, seleccionamos el primero por defecto
+                if (comboPostores.Items.Count > 0)
+                {
+                    comboPostores.SelectedIndex = 0;
+                }
+
                 var pujaActual = s.ObtenerPujaActual();
                 var ganador = s.ObtenerPostorGanador();
 
@@ -95,15 +127,23 @@ namespace ProyectoSubastasWinForms_NET8.Views
                 }
             }
         }
+
         private void btnGestionPostores_Click(object sender, EventArgs e)
         {
             if (listBoxSubastas.SelectedItem is Subasta s)
             {
-                new GestionPostoresForm(s).ShowDialog();
-                // Después de gestionar postores, refrescamos lista y combo
+                var gestionForm = new GestionPostoresForm(s);
+                gestionForm.ShowDialog();
+
+                // Refrescar la lista después de cerrar
                 listBoxSubastas_SelectedIndexChanged(null, null);
             }
+            else
+            {
+                MessageBox.Show("Seleccione una subasta primero.");
+            }
         }
+
         private void btnRegistrarPuja_Click(object sender, EventArgs e)
         {
             if (listBoxSubastas.SelectedItem is Subasta s &&
@@ -143,6 +183,11 @@ namespace ProyectoSubastasWinForms_NET8.Views
 
         }
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblGanadorActual_Click(object sender, EventArgs e)
         {
 
         }

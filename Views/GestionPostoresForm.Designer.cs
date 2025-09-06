@@ -18,6 +18,7 @@
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GestionPostoresForm));
             txtDni = new TextBox();
             txtNombre = new TextBox();
             txtApellido = new TextBox();
@@ -30,33 +31,37 @@
             // 
             // txtDni
             // 
+            txtDni.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtDni.Location = new Point(12, 12);
             txtDni.Name = "txtDni";
             txtDni.PlaceholderText = "DNI";
-            txtDni.Size = new Size(100, 31);
+            txtDni.Size = new Size(100, 29);
             txtDni.TabIndex = 0;
             // 
             // txtNombre
             // 
+            txtNombre.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtNombre.Location = new Point(120, 12);
             txtNombre.Name = "txtNombre";
             txtNombre.PlaceholderText = "Nombre";
-            txtNombre.Size = new Size(120, 31);
+            txtNombre.Size = new Size(120, 29);
             txtNombre.TabIndex = 1;
             // 
             // txtApellido
             // 
+            txtApellido.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtApellido.Location = new Point(250, 12);
             txtApellido.Name = "txtApellido";
             txtApellido.PlaceholderText = "Apellido";
-            txtApellido.Size = new Size(120, 31);
+            txtApellido.Size = new Size(120, 29);
             txtApellido.TabIndex = 2;
             // 
             // btnAgregar
             // 
-            btnAgregar.Location = new Point(576, 12);
+            btnAgregar.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAgregar.Location = new Point(562, 12);
             btnAgregar.Name = "btnAgregar";
-            btnAgregar.Size = new Size(94, 43);
+            btnAgregar.Size = new Size(108, 43);
             btnAgregar.TabIndex = 3;
             btnAgregar.Text = "Agregar";
             btnAgregar.UseVisualStyleBackColor = true;
@@ -64,9 +69,10 @@
             // 
             // btnEliminar
             // 
+            btnEliminar.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnEliminar.Location = new Point(676, 12);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(85, 43);
+            btnEliminar.Size = new Size(112, 43);
             btnEliminar.TabIndex = 4;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = true;
@@ -74,27 +80,30 @@
             // 
             // dataGridViewPostores
             // 
+            dataGridViewPostores.BackgroundColor = SystemColors.GradientInactiveCaption;
             dataGridViewPostores.ColumnHeadersHeight = 34;
-            dataGridViewPostores.Location = new Point(22, 79);
+            dataGridViewPostores.Location = new Point(12, 93);
             dataGridViewPostores.Name = "dataGridViewPostores";
             dataGridViewPostores.ReadOnly = true;
             dataGridViewPostores.RowHeadersWidth = 62;
             dataGridViewPostores.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewPostores.Size = new Size(523, 200);
+            dataGridViewPostores.Size = new Size(897, 437);
             dataGridViewPostores.TabIndex = 5;
             dataGridViewPostores.CellClick += dataGridViewPostores_CellClick;
             // 
             // txtEmail
             // 
+            txtEmail.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtEmail.Location = new Point(376, 12);
             txtEmail.Name = "txtEmail";
             txtEmail.PlaceholderText = "Email";
-            txtEmail.Size = new Size(150, 31);
+            txtEmail.Size = new Size(150, 29);
             txtEmail.TabIndex = 3;
             // 
             // GestionPostoresForm
             // 
-            ClientSize = new Size(771, 347);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            ClientSize = new Size(933, 563);
             Controls.Add(txtEmail);
             Controls.Add(txtDni);
             Controls.Add(txtNombre);

@@ -85,6 +85,10 @@ namespace ProyectoSubastasWinForms_NET8.Models
             var ganadora = CalcularGanador();
             return ganadora != null ? ganadora.Postor : null;
         }
+        public override string ToString()
+        {
+            return $"ID: {Id} | Artículo: {Articulo} | Subastador: {Subastador} | Puja inicial: ${PujaInicial:0.00} | Estado: {Estado}";
+        }
 
 
     }

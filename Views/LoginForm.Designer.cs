@@ -38,51 +38,61 @@
             // lblBienvenido
             // 
             lblBienvenido.AutoSize = true;
-            lblBienvenido.Location = new Point(239, 38);
+            lblBienvenido.BackColor = Color.FromArgb(255, 217, 0);
+            lblBienvenido.Font = new Font("Ink Free", 16F, FontStyle.Bold);
+            lblBienvenido.Location = new Point(105, 21);
             lblBienvenido.Name = "lblBienvenido";
-            lblBienvenido.Size = new Size(278, 25);
+            lblBienvenido.Size = new Size(511, 39);
             lblBienvenido.TabIndex = 1;
             lblBienvenido.Text = "Bienvenid@ al gestor de subastas";
+            lblBienvenido.Click += lblBienvenido_Click;
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(281, 88);
+            txtNombre.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txtNombre.Location = new Point(172, 107);
             txtNombre.Name = "txtNombre";
             txtNombre.PlaceholderText = "Nombre";
-            txtNombre.Size = new Size(150, 31);
+            txtNombre.Size = new Size(363, 29);
             txtNombre.TabIndex = 2;
             // 
             // txtApellido
             // 
-            txtApellido.Location = new Point(281, 146);
+            txtApellido.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txtApellido.Location = new Point(172, 182);
             txtApellido.Name = "txtApellido";
             txtApellido.PlaceholderText = "Apellido";
-            txtApellido.Size = new Size(150, 31);
+            txtApellido.Size = new Size(363, 29);
             txtApellido.TabIndex = 3;
             // 
             // btnContinuar
             // 
-            btnContinuar.Location = new Point(296, 253);
+            btnContinuar.BackColor = Color.FromArgb(255, 217, 0);
+            btnContinuar.Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnContinuar.Location = new Point(212, 360);
             btnContinuar.Name = "btnContinuar";
-            btnContinuar.Size = new Size(112, 54);
+            btnContinuar.Size = new Size(260, 54);
             btnContinuar.TabIndex = 5;
             btnContinuar.Text = "Continuar";
-            btnContinuar.UseVisualStyleBackColor = true;
+            btnContinuar.UseVisualStyleBackColor = false;
             btnContinuar.Click += btnContinuar_Click;
             // 
             // txtDni
             // 
-            txtDni.Location = new Point(281, 199);
+            txtDni.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txtDni.Location = new Point(172, 250);
             txtDni.Name = "txtDni";
             txtDni.PlaceholderText = "DNI";
-            txtDni.Size = new Size(150, 31);
+            txtDni.Size = new Size(363, 29);
             txtDni.TabIndex = 4;
             // 
             // LoginForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            BackColor = Color.FromArgb(255, 217, 0);
+            BackgroundImage = Properties.Resources.login;
+            ClientSize = new Size(815, 538);
             Controls.Add(txtDni);
             Controls.Add(btnContinuar);
             Controls.Add(txtApellido);
@@ -90,6 +100,7 @@
             Controls.Add(lblBienvenido);
             Name = "LoginForm";
             Text = "LoginForm";
+            Load += LoginForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

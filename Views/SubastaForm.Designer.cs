@@ -46,19 +46,21 @@ namespace ProyectoSubastasWinForms_NET8.Views
             // 
             // txtSubastador
             // 
+            txtSubastador.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtSubastador.Location = new Point(12, 12);
             txtSubastador.Name = "txtSubastador";
             txtSubastador.PlaceholderText = "Nombre del subastador";
-            txtSubastador.Size = new Size(449, 31);
+            txtSubastador.Size = new Size(449, 29);
             txtSubastador.TabIndex = 0;
             txtSubastador.TextChanged += txtSubastador_TextChanged;
             // 
             // txtArticulo
             // 
+            txtArticulo.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtArticulo.Location = new Point(568, 12);
             txtArticulo.Name = "txtArticulo";
             txtArticulo.PlaceholderText = "Artículo";
-            txtArticulo.Size = new Size(323, 31);
+            txtArticulo.Size = new Size(323, 29);
             txtArticulo.TabIndex = 1;
             // 
             // numericPujaInicial
@@ -107,52 +109,64 @@ namespace ProyectoSubastasWinForms_NET8.Views
             // 
             // btnNuevaSubasta
             // 
+            btnNuevaSubasta.BackColor = Color.FromArgb(255, 217, 0);
+            btnNuevaSubasta.Font = new Font("Tahoma", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnNuevaSubasta.Location = new Point(12, 177);
             btnNuevaSubasta.Name = "btnNuevaSubasta";
-            btnNuevaSubasta.Size = new Size(398, 34);
+            btnNuevaSubasta.Size = new Size(398, 83);
             btnNuevaSubasta.TabIndex = 6;
             btnNuevaSubasta.Text = "Nueva Subasta";
+            btnNuevaSubasta.UseVisualStyleBackColor = false;
             btnNuevaSubasta.Click += btnNuevaSubasta_Click;
             // 
             // btnGestionPostores
             // 
-            btnGestionPostores.Location = new Point(378, 294);
+            btnGestionPostores.BackColor = Color.FromArgb(255, 217, 0);
+            btnGestionPostores.Font = new Font("Tahoma", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnGestionPostores.Location = new Point(852, 294);
             btnGestionPostores.Name = "btnGestionPostores";
             btnGestionPostores.Size = new Size(157, 35);
             btnGestionPostores.TabIndex = 8;
             btnGestionPostores.Text = "Postores";
+            btnGestionPostores.UseVisualStyleBackColor = false;
             btnGestionPostores.Click += btnGestionPostores_Click;
             // 
             // btnRegistrarPuja
             // 
-            btnRegistrarPuja.Location = new Point(378, 467);
+            btnRegistrarPuja.BackColor = Color.FromArgb(255, 217, 0);
+            btnRegistrarPuja.Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnRegistrarPuja.Location = new Point(852, 477);
             btnRegistrarPuja.Name = "btnRegistrarPuja";
-            btnRegistrarPuja.Size = new Size(157, 37);
+            btnRegistrarPuja.Size = new Size(157, 66);
             btnRegistrarPuja.TabIndex = 11;
             btnRegistrarPuja.Text = "Registrar Puja";
+            btnRegistrarPuja.UseVisualStyleBackColor = false;
             btnRegistrarPuja.Click += btnRegistrarPuja_Click;
             // 
             // listBoxSubastas
             // 
-            listBoxSubastas.ItemHeight = 25;
+            listBoxSubastas.BackColor = SystemColors.GradientInactiveCaption;
+            listBoxSubastas.Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            listBoxSubastas.ItemHeight = 29;
             listBoxSubastas.Location = new Point(12, 294);
             listBoxSubastas.Name = "listBoxSubastas";
-            listBoxSubastas.Size = new Size(360, 229);
+            listBoxSubastas.Size = new Size(814, 265);
             listBoxSubastas.TabIndex = 7;
             listBoxSubastas.SelectedIndexChanged += listBoxSubastas_SelectedIndexChanged;
             // 
             // comboPostores
             // 
             comboPostores.AccessibleDescription = "";
-            comboPostores.Location = new Point(378, 335);
+            comboPostores.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            comboPostores.Location = new Point(852, 346);
             comboPostores.Name = "comboPostores";
-            comboPostores.Size = new Size(157, 33);
+            comboPostores.Size = new Size(157, 30);
             comboPostores.TabIndex = 9;
             // 
             // numericMonto
             // 
             numericMonto.DecimalPlaces = 2;
-            numericMonto.Location = new Point(378, 413);
+            numericMonto.Location = new Point(871, 421);
             numericMonto.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
             numericMonto.Name = "numericMonto";
             numericMonto.Size = new Size(120, 31);
@@ -161,27 +175,33 @@ namespace ProyectoSubastasWinForms_NET8.Views
             // lblPujaActual
             // 
             lblPujaActual.AutoSize = true;
-            lblPujaActual.Location = new Point(20, 548);
+            lblPujaActual.BackColor = Color.FromArgb(255, 217, 0);
+            lblPujaActual.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPujaActual.Location = new Point(967, 109);
             lblPujaActual.Name = "lblPujaActual";
-            lblPujaActual.Size = new Size(112, 25);
+            lblPujaActual.Size = new Size(133, 22);
             lblPujaActual.TabIndex = 12;
             lblPujaActual.Text = "Puja actual: -";
             // 
             // lblGanadorActual
             // 
             lblGanadorActual.AutoSize = true;
-            lblGanadorActual.Location = new Point(1025, 32);
+            lblGanadorActual.BackColor = Color.FromArgb(255, 217, 0);
+            lblGanadorActual.Font = new Font("Tahoma", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblGanadorActual.Location = new Point(932, 12);
             lblGanadorActual.Name = "lblGanadorActual";
-            lblGanadorActual.Size = new Size(134, 25);
+            lblGanadorActual.Size = new Size(232, 34);
             lblGanadorActual.TabIndex = 13;
             lblGanadorActual.Text = "Ganador Actual";
             // 
             // lblPujaInicial
             // 
             lblPujaInicial.AutoSize = true;
+            lblPujaInicial.BackColor = Color.FromArgb(255, 217, 0);
+            lblPujaInicial.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPujaInicial.Location = new Point(3, 63);
             lblPujaInicial.Name = "lblPujaInicial";
-            lblPujaInicial.Size = new Size(94, 25);
+            lblPujaInicial.Size = new Size(114, 22);
             lblPujaInicial.TabIndex = 14;
             lblPujaInicial.Text = "Puja Inicial";
             lblPujaInicial.Click += label1_Click;
@@ -189,32 +209,40 @@ namespace ProyectoSubastasWinForms_NET8.Views
             // lblPujaAumento
             // 
             lblPujaAumento.AutoSize = true;
+            lblPujaAumento.BackColor = Color.FromArgb(255, 217, 0);
+            lblPujaAumento.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPujaAumento.Location = new Point(143, 63);
             lblPujaAumento.Name = "lblPujaAumento";
-            lblPujaAumento.Size = new Size(124, 25);
+            lblPujaAumento.Size = new Size(139, 22);
             lblPujaAumento.TabIndex = 15;
             lblPujaAumento.Text = "Puja Aumento";
             // 
             // lblDuracion
             // 
             lblDuracion.AutoSize = true;
+            lblDuracion.BackColor = Color.FromArgb(255, 217, 0);
+            lblDuracion.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblDuracion.Location = new Point(290, 63);
             lblDuracion.Name = "lblDuracion";
-            lblDuracion.Size = new Size(163, 25);
+            lblDuracion.Size = new Size(187, 22);
             lblDuracion.TabIndex = 16;
             lblDuracion.Text = "Duracion (minutos)";
             // 
             // lblMonto
             // 
             lblMonto.AutoSize = true;
-            lblMonto.Location = new Point(378, 385);
+            lblMonto.BackColor = Color.FromArgb(255, 217, 0);
+            lblMonto.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblMonto.Location = new Point(891, 393);
             lblMonto.Name = "lblMonto";
-            lblMonto.Size = new Size(66, 25);
+            lblMonto.Size = new Size(67, 22);
             lblMonto.TabIndex = 17;
             lblMonto.Text = "Monto";
             // 
             // SubastaForm
             // 
+            BackgroundImage = Properties.Resources.Subasta;
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1193, 620);
             Controls.Add(lblMonto);
             Controls.Add(lblDuracion);
@@ -234,6 +262,7 @@ namespace ProyectoSubastasWinForms_NET8.Views
             Controls.Add(numericMonto);
             Controls.Add(btnRegistrarPuja);
             Controls.Add(lblPujaActual);
+            DoubleBuffered = true;
             Name = "SubastaForm";
             Text = "Gestión de Subastas";
             ((System.ComponentModel.ISupportInitialize)numericPujaInicial).EndInit();

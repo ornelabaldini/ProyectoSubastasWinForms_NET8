@@ -24,6 +24,21 @@ namespace ProyectoSubastasWinForms_NET8.Views
             this.Controls.Add(invisibleButton);
             this.ActiveControl = invisibleButton;
 
+            // Suscribir controles al evento KeyDown
+            txtDni.KeyDown += Control_KeyDown;
+            txtNombre.KeyDown += Control_KeyDown;
+            txtApellido.KeyDown += Control_KeyDown;
+        }
+
+        private void Control_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+
+                this.SelectNextControl((Control)sender, true, true, true, true);
+            }
         }
 
         private void btnContinuar_Click(object sender, EventArgs e)
@@ -43,7 +58,7 @@ namespace ProyectoSubastasWinForms_NET8.Views
                 return;
             }
 
-            Postor subastador = new Postor(dni, nombre, apellido, ""); 
+            Postor subastador = new Postor(dni, nombre, apellido, "");
             var subastaController = new SubastaController();
 
             var subastaForm = new SubastaForm(subastaController, new List<Postor>(), subastador);
@@ -52,5 +67,14 @@ namespace ProyectoSubastasWinForms_NET8.Views
             this.Hide();
         }
 
+        private void lblBienvenido_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

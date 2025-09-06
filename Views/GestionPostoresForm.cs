@@ -12,9 +12,25 @@ namespace ProyectoSubastasWinForms_NET8.Views
         {
             subasta = s;
             InitializeComponent();
+
+            //Mover foco con enter
+            txtDni.KeyDown += Control_KeyDown;
+            txtNombre.KeyDown += Control_KeyDown;
+            txtApellido.KeyDown += Control_KeyDown;
+            txtEmail.KeyDown += Control_KeyDown;
+
             CargarPostores();
         }
 
+        private void Control_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                this.SelectNextControl((Control)sender, true, true, true, true);
+            }
+        }
         private void CargarPostores()
         {
             dataGridViewPostores.DataSource = null;
