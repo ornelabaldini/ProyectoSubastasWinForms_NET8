@@ -1,67 +1,40 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using ProyectoSubastasWinForms_NET8.Models;
 
 namespace ProyectoSubastasWinForms_NET8.Controllers
 {
     public class SubastaController
     {
-        private List<Subasta> subastas = new List<Subasta>();
+        private readonly List<Subasta> subastas = new();
 
-        public List<Subasta> ObtenerSubastas() => subastas;
+        public IReadOnlyCollection<Subasta> ObtenerSubastas() => subastas.AsReadOnly();
+
         public int ObtenerNuevoId()
-        {
-            if (subastas.Count == 0) return 1;
-            return subastas.Max(s => s.Id) + 1;
-        }
+            => subastas.Count == 0 ? 1 : subastas.Max(s => s.Id) + 1;
 
         public void AgregarSubasta(Subasta s)
         {
+            if (subastas.Any(x => x.Id == s.Id))
+                throw new InvalidOperationException("Ya existe una subasta con ese ID.");
+
+            if (s.Duracion <= TimeSpan.Zero)
+                throw new InvalidOperationException("La duración de la subasta debe ser mayor a cero.");
+
             subastas.Add(s);
         }
 
         public void RegistrarPuja(Subasta s, Postor p, decimal monto)
         {
-            if (s.Estado != SubastaEstado.EnCurso)
-                throw new InvalidOperationException("La subasta no está en curso.");
-
-            if (!s.Postores.Contains(p))
-                throw new InvalidOperationException("El postor no pertenece a esta subasta.");
-
-            decimal pujaActual = s.ObtenerPujaActual();
-
-            if (monto < pujaActual + s.Incremento)
-                throw new InvalidOperationException($"La puja debe ser al menos {pujaActual + s.Incremento:C}.");
-
-            var nuevaPuja = new Puja(p, monto);
-            s.AgregarPuja(nuevaPuja);
+            s.RegistrarPuja(p, monto); 
         }
 
         public void ActualizarEstadoSubastas()
         {
             DateTime ahora = DateTime.Now;
             foreach (var subasta in subastas)
-            {
-                if (subasta.Estado == SubastaEstado.Finalizada)
-                    continue;
-
-                DateTime finSubasta = subasta.FechaInicio.Add(subasta.Duracion);
-
-                if (ahora >= finSubasta)
-                {
-                    subasta.Estado = SubastaEstado.Finalizada;
-                }
-                else if (ahora >= subasta.FechaInicio)
-                {
-                    subasta.Estado = SubastaEstado.EnCurso;
-                }
-                else
-                {
-                    subasta.Estado = SubastaEstado.Pendiente;
-                }
-            }
+                subasta.ActualizarEstado(ahora);
         }
-
     }
-
 }
-

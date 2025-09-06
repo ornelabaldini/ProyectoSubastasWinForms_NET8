@@ -8,47 +8,26 @@ namespace ProyectoSubastasWinForms_NET8.Services
     {
         private readonly PostorRepository repository;
 
-        public PostorService()
+        public PostorService(PostorRepository repository)
         {
-            repository = new PostorRepository();
+            this.repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
-        public List<Postor> ObtenerPostores()
-        {
-            return repository.ObtenerTodos();
-        }
+        public IReadOnlyCollection<Postor> ObtenerPostores() => repository.ObtenerTodos();
 
-        public bool CrearPostor(Postor postor)
+        public void CrearPostor(Postor postor)
         {
-            Postor existente = repository.ObtenerPorDni(postor.Dni);
-            if (existente != null)
-            {
-                return false;
-            }
             repository.AgregarPostor(postor);
-            return true;
         }
 
-        public bool ModificarPostor(Postor postor)
+        public void ReemplazarPostor(Postor postor)
         {
-            Postor existente = repository.ObtenerPorDni(postor.Dni);
-            if (existente == null)
-            {
-                return false;
-            }
-            repository.ModificarPostor(postor);
-            return true;
+            repository.ReemplazarPostor(postor);
         }
 
-        public bool EliminarPostor(int dni)
+        public void EliminarPostor(int dni)
         {
-            Postor existente = repository.ObtenerPorDni(dni);
-            if (existente == null)
-            {
-                return false;
-            }
             repository.EliminarPostor(dni);
-            return true;
         }
     }
 }

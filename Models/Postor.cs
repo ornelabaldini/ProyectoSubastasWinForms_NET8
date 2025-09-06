@@ -1,39 +1,40 @@
 ﻿using System;
+using System.Linq;
+using ProyectoSubastasWinForms_NET8.Exceptions;
 
 namespace ProyectoSubastasWinForms_NET8.Models
 {
     public class Postor
     {
-        public int Dni { get; set; }      
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public string Email { get; set; }
+        public int Dni { get; }
+        public string Nombre { get; }
+        public string Apellido { get; }
+        public string Email { get; }
 
         public Postor(int dni, string nombre, string apellido, string email)
         {
+            if (string.IsNullOrWhiteSpace(nombre)) throw new ArgumentException("El nombre es obligatorio.", nameof(nombre));
+            if (string.IsNullOrWhiteSpace(apellido)) throw new ArgumentException("El apellido es obligatorio.", nameof(apellido));
+            if (string.IsNullOrWhiteSpace(email)) throw new ArgumentException("El email es obligatorio.", nameof(email));
+
             Dni = dni;
             Nombre = nombre;
             Apellido = apellido;
             Email = email;
-            
         }
 
         public void Participar(Subasta subasta)
         {
             if (subasta.Estado != SubastaEstado.EnCurso)
-                throw new InvalidOperationException("La subasta no está en curso.");
+                throw new SubastaNoEnCursoException();
 
-            if (subasta.PujaList.Exists(p => p.Postor.Dni == this.Dni))
-                throw new InvalidOperationException("El postor ya está participando en esta subasta.");
+            if (subasta.PostoresRegistrados.Any(p => p.Dni == Dni))
+                throw new PostorInvalidoException("El postor ya está participando en esta subasta.");
         }
 
         public void RealizarPuja(Subasta subasta, decimal monto)
         {
-            if (subasta.Estado != SubastaEstado.EnCurso)
-                throw new InvalidOperationException("No se puede pujar en una subasta que no está en curso.");
-
-            Puja puja = new Puja(this, monto);
-            subasta.AgregarPuja(puja);
+            subasta.RegistrarPuja(this, monto); // delega toda la lógica a Subasta
         }
     }
 }

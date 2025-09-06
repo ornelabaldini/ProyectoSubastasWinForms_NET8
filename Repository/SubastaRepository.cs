@@ -6,18 +6,20 @@ namespace ProyectoSubastasWinForms_NET8.Repository
 {
     public class SubastaRepository
     {
-        private readonly List<Subasta> subastas;
+        private readonly List<Subasta> subastas = new();
 
-        public SubastaRepository()
-        {
-            subastas = new List<Subasta>();
-        }
-
-        public void Agregar(Subasta subasta) => subastas.Add(subasta);
-
-        public List<Subasta> ObtenerTodas() => subastas;
+        public IReadOnlyCollection<Subasta> ObtenerTodas() => subastas.AsReadOnly();
 
         public Subasta ObtenerPorId(int id) => subastas.FirstOrDefault(s => s.Id == id);
+
+        public void Agregar(Subasta subasta)
+        {
+            if (subasta == null) throw new ArgumentNullException(nameof(subasta));
+            if (subastas.Any(s => s.Id == subasta.Id))
+                throw new InvalidOperationException("Ya existe una subasta con ese ID.");
+
+            subastas.Add(subasta);
+        }
 
         public void Eliminar(int id)
         {

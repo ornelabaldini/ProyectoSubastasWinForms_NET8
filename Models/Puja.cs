@@ -4,13 +4,15 @@ namespace ProyectoSubastasWinForms_NET8.Models
 {
     public class Puja
     {
-        public Postor Postor { get; private set; }
-        public decimal Monto { get; private set; }
-        public DateTime Fecha { get; private set; }
+        public Postor Postor { get; }
+        public decimal Monto { get; }
+        public DateTime Fecha { get; }
 
         public Puja(Postor postor, decimal monto)
         {
-            Postor = postor;
+            Postor = postor ?? throw new ArgumentNullException(nameof(postor));
+            if (monto <= 0) throw new ArgumentException("El monto debe ser mayor a cero.", nameof(monto));
+
             Monto = monto;
             Fecha = DateTime.Now;
         }
