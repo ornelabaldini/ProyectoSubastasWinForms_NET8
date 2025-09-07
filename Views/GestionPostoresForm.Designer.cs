@@ -26,6 +26,7 @@
             btnEliminar = new Button();
             dataGridViewPostores = new DataGridView();
             txtEmail = new TextBox();
+            btnCerrar = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewPostores).BeginInit();
             SuspendLayout();
             // 
@@ -87,7 +88,7 @@
             dataGridViewPostores.ReadOnly = true;
             dataGridViewPostores.RowHeadersWidth = 62;
             dataGridViewPostores.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewPostores.Size = new Size(897, 437);
+            dataGridViewPostores.Size = new Size(897, 305);
             dataGridViewPostores.TabIndex = 5;
             dataGridViewPostores.CellClick += dataGridViewPostores_CellClick;
             // 
@@ -100,10 +101,25 @@
             txtEmail.Size = new Size(150, 29);
             txtEmail.TabIndex = 3;
             // 
+            // btnCerrar
+            // 
+            btnCerrar.BackColor = Color.FromArgb(255, 217, 0);
+            btnCerrar.Font = new Font("Tahoma", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCerrar.ForeColor = Color.Black;
+            btnCerrar.Location = new Point(385, 428);
+            btnCerrar.Name = "btnCerrar";
+            btnCerrar.Size = new Size(112, 54);
+            btnCerrar.TabIndex = 6;
+            btnCerrar.Text = "Cerrar";
+            btnCerrar.UseVisualStyleBackColor = false;
+            btnCerrar.Click += btnCerrar_Click;
+            // 
             // GestionPostoresForm
             // 
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(933, 563);
+            Controls.Add(btnCerrar);
             Controls.Add(txtEmail);
             Controls.Add(txtDni);
             Controls.Add(txtNombre);
@@ -111,6 +127,7 @@
             Controls.Add(btnAgregar);
             Controls.Add(btnEliminar);
             Controls.Add(dataGridViewPostores);
+            DoubleBuffered = true;
             Name = "GestionPostoresForm";
             Text = "Gestionar Postores";
             ((System.ComponentModel.ISupportInitialize)dataGridViewPostores).EndInit();
@@ -118,5 +135,6 @@
             PerformLayout();
         }
         private TextBox txtEmail;
+        private Button btnCerrar;
     }
 }

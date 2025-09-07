@@ -35,5 +35,10 @@ namespace ProyectoSubastasWinForms_NET8.Models
             Puja puja = new Puja(this, monto);
             subasta.AgregarPuja(puja);
         }
+        public override string ToString()
+        {
+            return $"{Nombre} {Apellido}";
+        }
+
     }
 }

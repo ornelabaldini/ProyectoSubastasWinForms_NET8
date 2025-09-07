@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Linq;
 using ProyectoSubastasWinForms_NET8.Models;
 using ProyectoSubastasWinForms_NET8.Controllers;
 
@@ -60,14 +61,14 @@ namespace ProyectoSubastasWinForms_NET8.Views
 
         private void CargarSubastas()
         {
-            listBoxSubastas.Items.Clear();
-            foreach (var s in controller.ObtenerSubastas())
-            {
-                listBoxSubastas.Items.Add(s);
-            }
+            var subastas = controller.ObtenerSubastas();
+            Subastas.DataSource = null;
+            Subastas.DataSource = subastas;
+
             lblGanadorActual.Text = "Ganador actual: -";
             comboPostores.Items.Clear();
         }
+
         private void btnNuevaSubasta_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtSubastador.Text))
@@ -93,6 +94,8 @@ namespace ProyectoSubastasWinForms_NET8.Views
                 TimeSpan.FromMinutes((double)numericDuracion.Value)
             );
 
+            s.Iniciar(); 
+
             controller.AgregarSubasta(s);
 
             CargarSubastas();
@@ -104,7 +107,7 @@ namespace ProyectoSubastasWinForms_NET8.Views
             comboPostores.Items.Clear();
             lblGanadorActual.Text = "Ganador actual: -";
 
-            if (listBoxSubastas.SelectedItem is Subasta s)
+            if (Subastas.SelectedItem is Subasta s)
             {
                 if (s.Postores != null)
                 {
@@ -130,23 +133,51 @@ namespace ProyectoSubastasWinForms_NET8.Views
 
         private void btnGestionPostores_Click(object sender, EventArgs e)
         {
-            if (listBoxSubastas.SelectedItem is Subasta s)
+            if (Subastas.SelectedItem is Subasta s)
             {
                 var gestionForm = new GestionPostoresForm(s);
-                gestionForm.ShowDialog();
+                gestionForm.ShowDialog(); // ventana modal
 
-                // Refrescar la lista después de cerrar
-                listBoxSubastas_SelectedIndexChanged(null, null);
+                //Refrescar lista y mantener la subasta seleccionada
+                RecargarListaSubastas(s);
             }
             else
             {
                 MessageBox.Show("Seleccione una subasta primero.");
             }
         }
+        private void RecargarListaSubastas(Subasta seleccionada)
+        {
+            if (Subastas == null) return;
+
+            // Actualizar la lista usando DataSource para evitar problemas con Items
+            var subastas = controller.ObtenerSubastas();
+
+            Subastas.DataSource = null;        // Reiniciar DataSource
+            Subastas.DataSource = subastas;    // Asignar lista actualizada
+
+            // Mantener la selección de la subasta pasada como parámetro
+            if (seleccionada != null)
+            {
+                // Buscar el objeto en la lista con el mismo Id
+                var itemSeleccionado = subastas.FirstOrDefault(s => s.Id == seleccionada.Id);
+
+                if (itemSeleccionado != null)
+                {
+                    Subastas.SelectedItem = itemSeleccionado;
+                }
+            }
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            timer1.Stop();
+            base.OnFormClosing(e);
+        }
 
         private void btnRegistrarPuja_Click(object sender, EventArgs e)
         {
-            if (listBoxSubastas.SelectedItem is Subasta s &&
+            if (Subastas.SelectedItem is Subasta s &&
                 comboPostores.SelectedItem is Postor p)
             {
                 try
@@ -186,10 +217,24 @@ namespace ProyectoSubastasWinForms_NET8.Views
         {
 
         }
-
         private void lblGanadorActual_Click(object sender, EventArgs e)
         {
 
         }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            // Guardar la subasta seleccionada actualmente
+            var seleccionada = Subastas.SelectedItem as Subasta;
+
+            // Actualizar estados
+            foreach (var s in controller.ObtenerSubastas())
+            {
+                s.ActualizarEstado(DateTime.Now);
+            }
+
+            // Volver a cargar la lista y restaurar la selección
+            RecargarListaSubastas(seleccionada);
+        }
+
     }
 }

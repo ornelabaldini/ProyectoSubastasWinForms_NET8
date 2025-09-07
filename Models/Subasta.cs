@@ -90,6 +90,17 @@ namespace ProyectoSubastasWinForms_NET8.Models
             return $"ID: {Id} | Artículo: {Articulo} | Subastador: {Subastador} | Puja inicial: ${PujaInicial:0.00} | Estado: {Estado}";
         }
 
+        public void ActualizarEstado(DateTime ahora)
+        {
+            if (Estado == SubastaEstado.Finalizada) return;
+
+            if (ahora >= FechaInicio.Add(Duracion))
+                Estado = SubastaEstado.Finalizada;
+            else if (ahora >= FechaInicio)
+                Estado = SubastaEstado.EnCurso;
+            else
+                Estado = SubastaEstado.Pendiente;
+        }
 
     }
 }

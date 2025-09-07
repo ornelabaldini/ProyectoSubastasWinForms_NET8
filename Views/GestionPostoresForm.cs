@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Windows.Forms;
+using System.Collections.Generic;
 using ProyectoSubastasWinForms_NET8.Models;
 
 namespace ProyectoSubastasWinForms_NET8.Views
@@ -84,7 +84,7 @@ namespace ProyectoSubastasWinForms_NET8.Views
         {
             if (e.RowIndex < 0 || e.RowIndex >= dataGridViewPostores.Rows.Count)
             {
-                return; 
+                return;
             }
 
             var postor = dataGridViewPostores.Rows[e.RowIndex].DataBoundItem as Postor;
@@ -98,9 +98,10 @@ namespace ProyectoSubastasWinForms_NET8.Views
         }
 
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnCerrar_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
     }
 }
+
