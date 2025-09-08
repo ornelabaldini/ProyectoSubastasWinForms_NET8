@@ -33,6 +33,8 @@
             txtApellido = new TextBox();
             btnContinuar = new Button();
             txtDni = new TextBox();
+            linkLabelRegistrarse = new LinkLabel();
+            linkLabelIniciarSesion = new LinkLabel();
             SuspendLayout();
             // 
             // lblBienvenido
@@ -86,6 +88,30 @@
             txtDni.Size = new Size(363, 29);
             txtDni.TabIndex = 4;
             // 
+            // linkLabelRegistrarse
+            // 
+            linkLabelRegistrarse.AutoSize = true;
+            linkLabelRegistrarse.LinkColor = Color.Black;
+            linkLabelRegistrarse.Location = new Point(230, 445);
+            linkLabelRegistrarse.Name = "linkLabelRegistrarse";
+            linkLabelRegistrarse.Size = new Size(243, 25);
+            linkLabelRegistrarse.TabIndex = 6;
+            linkLabelRegistrarse.TabStop = true;
+            linkLabelRegistrarse.Text = "¿No tienes cuenta? Regístrate";
+            linkLabelRegistrarse.LinkClicked += linkLabelRegistrarse_LinkClicked;
+            // 
+            // linkLabelIniciarSesion
+            // 
+            linkLabelIniciarSesion.AutoSize = true;
+            linkLabelIniciarSesion.LinkColor = Color.Black;
+            linkLabelIniciarSesion.Location = new Point(230, 486);
+            linkLabelIniciarSesion.Name = "linkLabelIniciarSesion";
+            linkLabelIniciarSesion.Size = new Size(255, 25);
+            linkLabelIniciarSesion.TabIndex = 7;
+            linkLabelIniciarSesion.TabStop = true;
+            linkLabelIniciarSesion.Text = "¿Ya tenés cuenta? Iniciar sesión";
+            linkLabelIniciarSesion.LinkClicked += linkLabelIniciarSesion_LinkClicked;
+            // 
             // LoginForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -93,6 +119,8 @@
             BackColor = Color.FromArgb(255, 217, 0);
             BackgroundImage = Properties.Resources.login;
             ClientSize = new Size(815, 538);
+            Controls.Add(linkLabelIniciarSesion);
+            Controls.Add(linkLabelRegistrarse);
             Controls.Add(txtDni);
             Controls.Add(btnContinuar);
             Controls.Add(txtApellido);
@@ -112,5 +140,7 @@
         private TextBox txtApellido;
         private Button btnContinuar;
         private TextBox txtDni;
+        private LinkLabel linkLabelRegistrarse;
+        private LinkLabel linkLabelIniciarSesion;
     }
 }

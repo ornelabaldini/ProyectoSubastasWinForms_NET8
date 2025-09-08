@@ -28,6 +28,21 @@ namespace ProyectoSubastasWinForms_NET8.Views
             txtDni.KeyDown += Control_KeyDown;
             txtNombre.KeyDown += Control_KeyDown;
             txtApellido.KeyDown += Control_KeyDown;
+
+            // Anclar al centro horizontalmente
+            lblBienvenido.Anchor = AnchorStyles.Top;
+
+            // Hacer que los TextBox se expandan horizontalmente
+            txtDni.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtNombre.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtApellido.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+
+            // El botón también se adapta
+            btnContinuar.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+
+            // Los LinkLabel se adaptan horizontalmente
+            linkLabelIniciarSesion.Anchor = AnchorStyles.Top;
+            linkLabelRegistrarse.Anchor = AnchorStyles.Top; 
         }
 
         private void Control_KeyDown(object sender, KeyEventArgs e)
@@ -76,5 +91,17 @@ namespace ProyectoSubastasWinForms_NET8.Views
         {
 
         }
+
+        private void linkLabelRegistrarse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            MessageBox.Show("Funcionalidad de registro próximamente disponible 😉", "Registro", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void linkLabelIniciarSesion_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {{
+            MessageBox.Show("Ya estás en el formulario de inicio de sesión", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
     }
+}
 }
