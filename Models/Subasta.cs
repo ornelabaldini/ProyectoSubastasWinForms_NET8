@@ -49,6 +49,11 @@ namespace ProyectoSubastasWinForms_NET8.Models
             if (Estado != SubastaEstado.EnCurso)
                 throw new InvalidOperationException("La subasta no está en curso.");
 
+            var pujaGanadora = CalcularGanador();
+
+            if (pujaGanadora != null)
+                Ganador = pujaGanadora.Postor;
+
             Estado = SubastaEstado.Finalizada;
         }
 

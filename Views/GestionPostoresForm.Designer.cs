@@ -38,6 +38,7 @@
             txtDni.PlaceholderText = "DNI";
             txtDni.Size = new Size(100, 29);
             txtDni.TabIndex = 0;
+            txtDni.TextChanged += txtDni_TextChanged;
             // 
             // txtNombre
             // 
@@ -106,11 +107,11 @@
             btnCerrar.BackColor = Color.FromArgb(255, 217, 0);
             btnCerrar.Font = new Font("Tahoma", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnCerrar.ForeColor = Color.Black;
-            btnCerrar.Location = new Point(385, 428);
+            btnCerrar.Location = new Point(398, 432);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(112, 54);
             btnCerrar.TabIndex = 6;
-            btnCerrar.Text = "Cerrar";
+            btnCerrar.Text = "Listo";
             btnCerrar.UseVisualStyleBackColor = false;
             btnCerrar.Click += btnCerrar_Click;
             // 

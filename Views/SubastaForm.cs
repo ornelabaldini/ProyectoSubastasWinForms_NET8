@@ -19,7 +19,10 @@ namespace ProyectoSubastasWinForms_NET8.Views
             postores = listaPostores;
             subastadorActual = subastador;
 
+
             InitializeComponent();
+
+            // Suscribir controles al evento KeyDown    
             txtArticulo.KeyDown += Control_KeyDown;
             txtSubastador.KeyDown += Control_KeyDown;
             numericPujaInicial.KeyDown += Control_KeyDown;
@@ -94,7 +97,7 @@ namespace ProyectoSubastasWinForms_NET8.Views
                 TimeSpan.FromMinutes((double)numericDuracion.Value)
             );
 
-            s.Iniciar(); 
+            s.Iniciar();
 
             controller.AgregarSubasta(s);
 
@@ -226,15 +229,56 @@ namespace ProyectoSubastasWinForms_NET8.Views
             // Guardar la subasta seleccionada actualmente
             var seleccionada = Subastas.SelectedItem as Subasta;
 
-            // Actualizar estados
+            // Recorrer todas las subastas
             foreach (var s in controller.ObtenerSubastas())
             {
+                // Guardar estado anterior
+                var estadoAnterior = s.Estado;
+
+                // Actualizar estado según el tiempo actual
                 s.ActualizarEstado(DateTime.Now);
+
+                // Si acaba de finalizar ahora, mostrar cartel
+                if (estadoAnterior == SubastaEstado.EnCurso && s.Estado == SubastaEstado.Finalizada)
+                {
+                    var pujaGanadora = s.OfertaGanadora;
+
+                    if (pujaGanadora != null)
+                    {
+                        string nombreGanador = pujaGanadora.Postor?.Nombre ?? "Desconocido";
+                        decimal monto = pujaGanadora.Monto;
+
+                        string montoFormateado = monto.ToString("#,0.00")
+                                                      .Replace(",", "@")
+                                                      .Replace(".", ",")
+                                                      .Replace("@", ".");
+
+                        string mensaje = $"🏁 ¡Subasta finalizada!\n\n🏆 Ganador: {nombreGanador}\n💰 Monto: ${montoFormateado}";
+                        MessageBox.Show(mensaje, "Resultado de la Subasta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"🛑 La subasta de '{s.Articulo}' ha finalizado sin pujas.", "Subasta finalizada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
             }
 
-            // Volver a cargar la lista y restaurar la selección
+            // Recargar la lista y restaurar selección
             RecargarListaSubastas(seleccionada);
         }
 
+        private void lblGanadorActual_Click_1(object sender, EventArgs e)
+        {
+
+        }
+        private void lblPujaActual_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtDescripcion_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

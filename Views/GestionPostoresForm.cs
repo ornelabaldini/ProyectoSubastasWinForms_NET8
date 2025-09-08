@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ProyectoSubastasWinForms_NET8.Models;
 
 namespace ProyectoSubastasWinForms_NET8.Views
-{
+{   
     public partial class GestionPostoresForm : Form
     {
         private Subasta subasta;
@@ -12,6 +12,13 @@ namespace ProyectoSubastasWinForms_NET8.Views
         {
             subasta = s;
             InitializeComponent();
+
+            // Quitar el foco inicial del TextBox para que se vea el PlaceholderText
+            Button invisibleButton = new Button();
+            invisibleButton.Size = new Size(0, 0);
+            invisibleButton.Location = new Point(-100, -100); // fuera de la vista
+            this.Controls.Add(invisibleButton);
+            this.ActiveControl = invisibleButton;
 
             //Mover foco con enter
             txtDni.KeyDown += Control_KeyDown;
@@ -101,6 +108,11 @@ namespace ProyectoSubastasWinForms_NET8.Views
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void txtDni_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
