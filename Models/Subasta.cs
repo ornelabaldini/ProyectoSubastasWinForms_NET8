@@ -15,11 +15,8 @@ namespace ProyectoSubastasWinForms_NET8.Models
         public SubastaEstado Estado { get; set; }
         public DateTime FechaInicio { get; private set; }
         public DateTime FechaFin { get; private set; }
-        public List<Puja> PujaList { get; private set; }
-        public List<Postor> Postores { get; set; } = new List<Postor>();
-        public Postor Ganador { get; set; }
-
-
+        public Dictionary<Postor, decimal> Pujas { get; private set; } = new();
+        public Postor Ganador { get; private set; }
 
         public Subasta(int id, string articulo, string subastador, decimal pujaInicial, decimal incremento, TimeSpan duracion)
         {
@@ -30,8 +27,6 @@ namespace ProyectoSubastasWinForms_NET8.Models
             Incremento = incremento;
             Duracion = duracion;
             Estado = SubastaEstado.Pendiente;
-            PujaList = new List<Puja>();
-            Postores = new List<Postor>();
         }
 
         public void Iniciar()
@@ -49,63 +44,66 @@ namespace ProyectoSubastasWinForms_NET8.Models
             if (Estado != SubastaEstado.EnCurso)
                 throw new InvalidOperationException("La subasta no está en curso.");
 
-            var pujaGanadora = CalcularGanador();
-
-            if (pujaGanadora != null)
-                Ganador = pujaGanadora.Postor;
-
             Estado = SubastaEstado.Finalizada;
+            Ganador = CalcularGanador();
         }
 
-        public void AgregarPuja(Puja puja)
+        public void Pujar(Postor postor, decimal monto)
         {
             if (Estado != SubastaEstado.EnCurso)
-                throw new InvalidOperationException("No se pueden agregar pujas a una subasta que no está en curso.");
+                throw new InvalidOperationException("No se puede pujar en una subasta que no está en curso.");
 
-            decimal montoMinimo = PujaList.Any() ? PujaList.Max(p => p.Monto) + Incremento : PujaInicial;
+            decimal pujaActual = ObtenerPujaActual();
+            decimal minimoPermitido = pujaActual + Incremento;
 
-            if (puja.Monto < montoMinimo)
-                throw new InvalidOperationException($"La puja debe ser al menos {montoMinimo}.");
+            if (monto < minimoPermitido)
+                throw new InvalidOperationException($"La puja debe ser al menos ${minimoPermitido:0.00}");
 
-            PujaList.Add(puja);
+            Pujas[postor] = monto; 
         }
-
-        public Puja CalcularGanador()
-        {
-            if (!PujaList.Any())
-                return null;
-
-            return PujaList.OrderByDescending(p => p.Monto).First();
-        }
-        public Puja OfertaGanadora => CalcularGanador();
 
         public decimal ObtenerPujaActual()
         {
-            var ganadora = CalcularGanador();
-            return ganadora != null ? ganadora.Monto : PujaInicial;
+            if (Pujas.Count == 0)
+                return PujaInicial;
+
+            return Pujas.Values.Max();
         }
 
-        public Postor ObtenerPostorGanador()
+        public Postor CalcularGanador()
         {
-            var ganadora = CalcularGanador();
-            return ganadora != null ? ganadora.Postor : null;
+            if (Pujas.Count == 0)
+                return null;
+
+            return Pujas.OrderByDescending(p => p.Value).First().Key;
         }
-        public override string ToString()
-        {
-            return $"ID: {Id} | Artículo: {Articulo} | Subastador: {Subastador} | Puja inicial: ${PujaInicial:0.00} | Estado: {Estado}";
-        }
+
 
         public void ActualizarEstado(DateTime ahora)
         {
-            if (Estado == SubastaEstado.Finalizada) return;
+            if (Estado == SubastaEstado.Finalizada)
+                return;
 
-            if (ahora >= FechaInicio.Add(Duracion))
-                Estado = SubastaEstado.Finalizada;
-            else if (ahora >= FechaInicio)
-                Estado = SubastaEstado.EnCurso;
-            else
+            if (FechaInicio == default)
+            {
                 Estado = SubastaEstado.Pendiente;
+            }
+            else if (ahora >= FechaInicio.Add(Duracion))
+            {
+                Finalizar(); // Usamos el método que ya calcula el ganador
+            }
+            else if (ahora >= FechaInicio){
+                Estado = SubastaEstado.EnCurso;
+            }
+            else
+            {
+                Estado = SubastaEstado.Pendiente;
+            }
         }
 
+        public override string ToString()
+        {
+            return $"ID: {Id} | Artículo: {Articulo} | Subastador: {Subastador} | Puja actual: ${ObtenerPujaActual():0.00} | Estado: {Estado}";
+        }
     }
 }

@@ -8,6 +8,7 @@ namespace ProyectoSubastasWinForms_NET8.Models
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Email { get; set; }
+        public double Monto { get; set; }   
 
         public Postor(int dni, string nombre, string apellido, string email)
         {
@@ -20,21 +21,13 @@ namespace ProyectoSubastasWinForms_NET8.Models
 
         public void Participar(Subasta subasta)
         {
-            if (subasta.Estado != SubastaEstado.EnCurso)
-                throw new InvalidOperationException("La subasta no está en curso.");
-
-            if (subasta.PujaList.Exists(p => p.Postor.Dni == this.Dni))
-                throw new InvalidOperationException("El postor ya está participando en esta subasta.");
+        
         }
 
-        public void RealizarPuja(Subasta subasta, decimal monto)
-        {
-            if (subasta.Estado != SubastaEstado.EnCurso)
-                throw new InvalidOperationException("No se puede pujar en una subasta que no está en curso.");
-
-            Puja puja = new Puja(this, monto);
-            subasta.AgregarPuja(puja);
+        public void Pujar(Subasta subasta, decimal monto)
+        {  
         }
+
         public override string ToString()
         {
             return $"{Nombre} {Apellido}";

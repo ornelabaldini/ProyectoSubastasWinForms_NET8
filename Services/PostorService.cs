@@ -13,11 +13,7 @@ namespace ProyectoSubastasWinForms_NET8.Services
             repository = new PostorRepository();
         }
 
-        public List<Postor> ObtenerPostores()
-        {
-            return repository.ObtenerTodos();
-        }
-
+       
         public bool CrearPostor(Postor postor)
         {
             Postor existente = repository.ObtenerPorDni(postor.Dni);
@@ -49,6 +45,11 @@ namespace ProyectoSubastasWinForms_NET8.Services
             }
             repository.EliminarPostor(dni);
             return true;
+        }
+
+        public List<Postor> ObtenerPostores()
+        {
+            return repository.ObtenerTodos();
         }
     }
 }

@@ -40,17 +40,20 @@
             // lblBienvenido
             // 
             lblBienvenido.AutoSize = true;
-            lblBienvenido.BackColor = Color.FromArgb(255, 217, 0);
-            lblBienvenido.Font = new Font("Ink Free", 16F, FontStyle.Bold);
-            lblBienvenido.Location = new Point(105, 21);
+            lblBienvenido.BackColor = Color.Transparent;
+            lblBienvenido.FlatStyle = FlatStyle.Flat;
+            lblBienvenido.Font = new Font("Ink Free", 26F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblBienvenido.Location = new Point(-10, 9);
             lblBienvenido.Name = "lblBienvenido";
-            lblBienvenido.Size = new Size(511, 39);
+            lblBienvenido.Size = new Size(813, 64);
             lblBienvenido.TabIndex = 1;
             lblBienvenido.Text = "Bienvenid@ al gestor de subastas";
             lblBienvenido.Click += lblBienvenido_Click;
             // 
             // txtNombre
             // 
+            txtNombre.BackColor = SystemColors.ScrollBar;
+            txtNombre.BorderStyle = BorderStyle.FixedSingle;
             txtNombre.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtNombre.Location = new Point(172, 107);
             txtNombre.Name = "txtNombre";
@@ -60,6 +63,8 @@
             // 
             // txtApellido
             // 
+            txtApellido.BackColor = SystemColors.ScrollBar;
+            txtApellido.BorderStyle = BorderStyle.FixedSingle;
             txtApellido.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtApellido.Location = new Point(172, 182);
             txtApellido.Name = "txtApellido";
@@ -70,10 +75,12 @@
             // btnContinuar
             // 
             btnContinuar.BackColor = Color.FromArgb(255, 217, 0);
+            btnContinuar.FlatAppearance.BorderColor = Color.Black;
+            btnContinuar.FlatStyle = FlatStyle.Flat;
             btnContinuar.Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnContinuar.Location = new Point(212, 360);
+            btnContinuar.Location = new Point(264, 306);
             btnContinuar.Name = "btnContinuar";
-            btnContinuar.Size = new Size(260, 54);
+            btnContinuar.Size = new Size(150, 54);
             btnContinuar.TabIndex = 5;
             btnContinuar.Text = "Continuar";
             btnContinuar.UseVisualStyleBackColor = false;
@@ -81,6 +88,8 @@
             // 
             // txtDni
             // 
+            txtDni.BackColor = SystemColors.ScrollBar;
+            txtDni.BorderStyle = BorderStyle.FixedSingle;
             txtDni.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtDni.Location = new Point(172, 250);
             txtDni.Name = "txtDni";
@@ -91,20 +100,22 @@
             // linkLabelRegistrarse
             // 
             linkLabelRegistrarse.AutoSize = true;
+            linkLabelRegistrarse.BackColor = Color.Transparent;
             linkLabelRegistrarse.LinkColor = Color.Black;
             linkLabelRegistrarse.Location = new Point(230, 445);
             linkLabelRegistrarse.Name = "linkLabelRegistrarse";
-            linkLabelRegistrarse.Size = new Size(243, 25);
+            linkLabelRegistrarse.Size = new Size(239, 25);
             linkLabelRegistrarse.TabIndex = 6;
             linkLabelRegistrarse.TabStop = true;
-            linkLabelRegistrarse.Text = "¿No tienes cuenta? Regístrate";
+            linkLabelRegistrarse.Text = "¿No tenés cuenta? Registrate";
             linkLabelRegistrarse.LinkClicked += linkLabelRegistrarse_LinkClicked;
             // 
             // linkLabelIniciarSesion
             // 
             linkLabelIniciarSesion.AutoSize = true;
+            linkLabelIniciarSesion.BackColor = Color.Transparent;
             linkLabelIniciarSesion.LinkColor = Color.Black;
-            linkLabelIniciarSesion.Location = new Point(230, 486);
+            linkLabelIniciarSesion.Location = new Point(214, 484);
             linkLabelIniciarSesion.Name = "linkLabelIniciarSesion";
             linkLabelIniciarSesion.Size = new Size(255, 25);
             linkLabelIniciarSesion.TabIndex = 7;

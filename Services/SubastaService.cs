@@ -25,20 +25,15 @@ namespace ProyectoSubastasWinForms_NET8.Services
             subasta.Finalizar();
         }
 
-        public Puja CalcularGanador(int subastaId)
+        public void ActualizarEstadosTodasLasSubastas()
         {
-            var subasta = repository.ObtenerPorId(subastaId) ?? throw new InvalidOperationException("Subasta no encontrada.");
-            return subasta.CalcularGanador();
-        }
-
-        public void ActualizarEstados()
-        {
-            var ahora = DateTime.Now;
+            DateTime ahora = DateTime.Now;
             foreach (var subasta in repository.ObtenerTodas())
             {
                 subasta.ActualizarEstado(ahora);
             }
         }
+
 
     }
 }

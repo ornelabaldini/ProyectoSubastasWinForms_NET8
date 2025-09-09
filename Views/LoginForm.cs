@@ -98,10 +98,10 @@ namespace ProyectoSubastasWinForms_NET8.Views
         }
 
         private void linkLabelIniciarSesion_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {{
+        {
             MessageBox.Show("Ya estás en el formulario de inicio de sesión", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
     }
 }
-}
+

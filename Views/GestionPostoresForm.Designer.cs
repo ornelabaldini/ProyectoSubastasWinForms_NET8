@@ -105,6 +105,7 @@
             // btnCerrar
             // 
             btnCerrar.BackColor = Color.FromArgb(255, 217, 0);
+            btnCerrar.FlatStyle = FlatStyle.Flat;
             btnCerrar.Font = new Font("Tahoma", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnCerrar.ForeColor = Color.Black;
             btnCerrar.Location = new Point(398, 432);
