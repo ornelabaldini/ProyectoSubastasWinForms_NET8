@@ -1,30 +1,24 @@
-﻿using ProyectoSubastasWinForms_NET8.Models;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
+using ProyectoSubastasWinForms_NET8.Models;
 
 namespace ProyectoSubastasWinForms_NET8.Repository
 {
     public class SubastaRepository
     {
-        private readonly List<Subasta> subastas;
+        private readonly List<Subasta> subastas = new List<Subasta>();
 
-        public SubastaRepository()
+        public List<Subasta> ObtenerTodos() => subastas;
+
+        public void Agregar(Subasta subasta)
         {
-            subastas = new List<Subasta>();
+            subastas.Add(subasta);
         }
 
-        public void Agregar(Subasta subasta) => subastas.Add(subasta);
-
-        public void Eliminar(int id)
+        public int ObtenerNuevoId()
         {
-            var subasta = ObtenerPorId(id);
-            if (subasta != null)
-                subastas.Remove(subasta);
-        }
-
-        public List<Subasta> ObtenerTodas() => subastas;
-        public Subasta ObtenerPorId(int id) => subastas.FirstOrDefault(s => s.Id == id);
-
-        
+            if (subastas.Count == 0)
+                return 1;
+            return subastas[subastas.Count - 1].Id + 1;}
     }
 }

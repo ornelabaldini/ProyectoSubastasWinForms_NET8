@@ -1,34 +1,37 @@
 ﻿using System.Collections.Generic;
 using ProyectoSubastasWinForms_NET8.Models;
+using ProyectoSubastasWinForms_NET8.Services;
 
 namespace ProyectoSubastasWinForms_NET8.Controllers
 {
     public class SubastaController
     {
-        private List<Subasta> subastas = new List<Subasta>();
+        private readonly SubastaService service;
 
-        public List<Subasta> ObtenerSubastasPorEstado(SubastaEstado estado)
+        public SubastaController(SubastaService srv)
         {
-            return subastas.FindAll(s => s.Estado == estado);
+            service = srv;
         }
 
-        public int ObtenerNuevoId()
+        public List<Subasta> ObtenerSubastas()
         {
-            if (subastas.Count == 0) return 1;
-            return subastas.Max(s => s.Id) + 1;
+            return service.ObtenerSubastas();
         }
 
         public void AgregarSubasta(Subasta s)
         {
-            subastas.Add(s);
+            service.AgregarSubasta(s);
         }
 
-        public override string ToString()
+        public int ObtenerNuevoId()
         {
-            return $"Total de subastas: {subastas.Count}";
+            return service.ObtenerNuevoId();
+        }
+
+        public void RegistrarPuja(Subasta subasta, Postor postor, decimal monto)
+        {
+            service.RegistrarPuja(subasta, postor, monto);
         }
 
     }
-
 }
-

@@ -1,5 +1,6 @@
 ﻿using ProyectoSubastasWinForms_NET8.Models;
 using System.Collections.Generic;
+using System;
 
 namespace ProyectoSubastasWinForms_NET8.Controllers
 {
@@ -7,14 +8,16 @@ namespace ProyectoSubastasWinForms_NET8.Controllers
     {
         private List<Postor> postores = new List<Postor>();
 
-        public bool AgregarPostor(int dni, string nombre, string apellido, string email)
+        public bool AgregarPostor(int dni, string nombre, string apellido, string email, decimal monto)
         {
-            if (postores.Exists(p => p.Dni == dni))
-                return false;
+            if (!postores.Exists(p => p.Dni == dni))
+            {
+                Postor p = new Postor(dni, nombre, apellido, email, monto);    
+                postores.Add(p);
+                return true;
+            }
 
-            Postor p = new Postor(dni, nombre, apellido, email);
-            postores.Add(p);
-            return true;
+            return false;
         }
 
         public bool ModificarPostor(int dni, string nombre, string apellido, string email)

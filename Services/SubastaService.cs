@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using ProyectoSubastasWinForms_NET8.Models;
 using ProyectoSubastasWinForms_NET8.Repository;
 
@@ -8,32 +9,41 @@ namespace ProyectoSubastasWinForms_NET8.Services
     {
         private readonly SubastaRepository repository;
 
-        public SubastaService(SubastaRepository repository)
+        public SubastaService(SubastaRepository repo)
         {
-            this.repository = repository;
+            repository = repo;
         }
 
-        public void IniciarSubasta(int subastaId)
+        public List<Subasta> ObtenerSubastas()
         {
-            var subasta = repository.ObtenerPorId(subastaId) ?? throw new InvalidOperationException("Subasta no encontrada.");
-            subasta.Iniciar();
+            return repository.ObtenerTodos();
         }
 
-        public void FinalizarSubasta(int subastaId)
+        public void AgregarSubasta(Subasta subasta)
         {
-            var subasta = repository.ObtenerPorId(subastaId) ?? throw new InvalidOperationException("Subasta no encontrada.");
-            subasta.Finalizar();
+            repository.Agregar(subasta);
         }
 
-        public void ActualizarEstadosTodasLasSubastas()
+        public int ObtenerNuevoId()
         {
-            DateTime ahora = DateTime.Now;
-            foreach (var subasta in repository.ObtenerTodas())
-            {
-                subasta.ActualizarEstado(ahora);
-            }
+            return repository.ObtenerNuevoId();
         }
 
+        public void RegistrarPuja(Subasta subasta, Postor postor, decimal monto)
+        {
+            if (subasta.Estado != SubastaEstado.EnCurso)
+                throw new InvalidOperationException("La subasta no está en curso.");
 
+            var pujaActual = subasta.ObtenerPujaActual();
+
+            if (monto < pujaActual + subasta.PujaAumento)
+                throw new InvalidOperationException($"El monto debe ser al menos {pujaActual + subasta.PujaAumento}");
+
+            var oferta = new Oferta(postor, monto);
+            subasta.Ofertas.Add(oferta);
+
+            if (!subasta.Postores.Contains(postor))
+                subasta.Postores.Add(postor);
+        }
     }
 }
