@@ -8,7 +8,7 @@ Permite:
 - Determinar automáticamente el ganador, el monto a pagar y la diferencia con la puja inicial al finalizar la subasta.  
 
 ## Estructura del proyecto
-- **Models:** Entidades como `Subasta` y `Postor`.  
+- **Models:** Entidades  
 - **Services:** Lógica de negocio (ej. cálculo de ganador).  
 - **Repository:** Manejo de datos.  
 - **Views:** Formularios de Windows Forms.  

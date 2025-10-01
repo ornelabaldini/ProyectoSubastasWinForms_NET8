@@ -1,5 +1,6 @@
 ﻿using ProyectoSubastasWinForms_NET8.Controllers;    
 using ProyectoSubastasWinForms_NET8.Models;
+using ProyectoSubastasWinForms_NET8.Models.enums;
 using System;
 using System.Collections.Generic;
 using System.Data;

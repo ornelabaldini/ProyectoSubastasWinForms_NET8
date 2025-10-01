@@ -1,4 +1,4 @@
-namespace ProyectoSubastasWinForms_NET8.Models
+namespace ProyectoSubastasWinForms_NET8.Models.enums
 {
     public enum SubastaEstado
     {

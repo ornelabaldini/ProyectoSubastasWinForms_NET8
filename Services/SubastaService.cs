@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using ProyectoSubastasWinForms_NET8.Models;
+using ProyectoSubastasWinForms_NET8.Models.enums;
 using ProyectoSubastasWinForms_NET8.Repository;
 
 namespace ProyectoSubastasWinForms_NET8.Services
