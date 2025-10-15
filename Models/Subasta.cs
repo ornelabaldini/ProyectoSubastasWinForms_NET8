@@ -8,14 +8,13 @@ namespace ProyectoSubastasWinForms_NET8.Models
     public class Subasta
     {
         public int Id { get; set; }
+        public double PujaInicial { get; set; }
+        public double PujaAumento { get; set; }
         public string Articulo { get; set; }
         public string Subastador { get; set; }
-        public decimal PujaInicial { get; set; }
-        public decimal PujaAumento { get; set; }
-        public TimeSpan Duracion { get; set; }
+        public DateTime FechaHoraInicio { get; set; }
+        public int DuracionMinutos { get; set; }
         public SubastaEstado Estado { get; set; }
-        public DateTime FechaInicio { get; private set; }
-        public DateTime FechaFin { get; private set; }
         public List<Postor> Postores { get; set; } = new List<Postor>();
         public Postor Ganador { get; set; }
 
