@@ -14,7 +14,7 @@ namespace ProyectoSubastasWinForms_NET8.Models
         public string Subastador { get; set; }
         public DateTime FechaHoraInicio { get; set; }
         public int DuracionMinutos { get; set; }
-        public SubastaEstado Estado { get; set; }
+        public SubastaEstado Estado { get; private set; }
         public List<Postor> Postores { get; set; } = new List<Postor>();
         public Postor Ganador { get; set; }
 
@@ -27,7 +27,7 @@ namespace ProyectoSubastasWinForms_NET8.Models
             PujaInicial = pujaInicial;
             PujaAumento = pujaAumento;
             Duracion = duracion;
-            Estado = SubastaEstado.Pendiente;
+            Estado = SubastaEstado.Programada;
             Postores = new List<Postor>();
         }
           
