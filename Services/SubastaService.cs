@@ -9,42 +9,65 @@ namespace ProyectoSubastasWinForms_NET8.Services
     public class SubastaService
     {
         private readonly SubastaRepository repository;
-
-        public SubastaService(SubastaRepository repo)
+        public SubastaService() 
         {
-            repository = repo;
+            repository = new SubastaRepository();
+        }
+        public Subasta ObtenerPoridSubasta(int idSubasta)
+        {
+            return repository.ObtenerPoridSubasta(idSubasta);
         }
 
-        public List<Subasta> ObtenerSubastas()
+        public bool RegistrarSubasta(Subasta nuevaSubasta)
+        {
+            if (nuevaSubasta == null || nuevaSubasta.ArticuloPorSubastar == null || nuevaSubasta.Subastador == null)
+                return false;
+
+            repository.Agregar(nuevaSubasta); 
+            return true;
+        }
+
+        public List<Subasta> ObtenerSubastas() 
         {
             return repository.ObtenerTodos();
         }
 
-        public void AgregarSubasta(Subasta subasta)
+        public bool EliminarSubasta(int idSubasta)
         {
-            repository.Agregar(subasta);
+            Subasta existente = repository.ObtenerPoridSubasta(idSubasta);
+            if (existente == null)
+            { return false; }
+            repository.Eliminar(idSubasta);
+            return true;
         }
 
-        public int ObtenerNuevoId()
+        public bool ModificarSubasta(Subasta subasta)
         {
-            return repository.ObtenerNuevoId();
+            Subasta existente = repository.ObtenerPoridSubasta(subasta.idDeSubasta);
+            if (existente == null)
+            {
+                return false;
+            }
+            repository.ModificarSubasta(subasta);
+            return true;
         }
 
-        public void RegistrarPuja(Subasta subasta, Postor postor, decimal monto)
+        public bool ActualizarPostorGanador(Subasta subasta)
         {
-            if (subasta.Estado != SubastaEstado.EnCurso)
-                throw new InvalidOperationException("La subasta no está en curso.");
-
-            var pujaActual = subasta.ObtenerPujaActual();
-
-            if (monto < pujaActual + subasta.PujaAumento)
-                throw new InvalidOperationException($"El monto debe ser al menos {pujaActual + subasta.PujaAumento}");
-
-            var oferta = new Oferta(postor, monto);
-            subasta.Ofertas.Add(oferta);
-
-            if (!subasta.Postores.Contains(postor))
-                subasta.Postores.Add(postor);
+            Subasta existente = repository.ObtenerPoridSubasta(subasta.idDeSubasta);
+            if (existente == null)
+            {
+                return false;
+            }
+            repository.ActualizarPostorGanador(subasta);
+            return true;
         }
+
+        
+        public Subasta ObtenerPorid(int idSubasta)
+        {
+            return repository.ObtenerPoridSubasta(idSubasta);
+        }
+
     }
 }

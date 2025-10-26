@@ -7,33 +7,53 @@ namespace ProyectoSubastasWinForms_NET8.Repository
     public class PostorRepository
     {
         private readonly List<Postor> postores;
-
+        private int siguienteId = 1;
         public PostorRepository()
         {
             postores = new List<Postor>();
         }
-
-        public List<Postor> ObtenerTodos() => postores;
-
-        public Postor ObtenerPorDni(int dni) => postores.FirstOrDefault(p => p.Dni == dni);
-
-        public void AgregarPostor(Postor postor) => postores.Add(postor);
-
-        public void ModificarPostor(Postor postor)
+        public List<Postor> ObtenerTodos()
         {
-            var existente = postores.FirstOrDefault(p => p.Dni == postor.Dni);
-            if (existente != null)
+            return postores;
+        }
+        public Postor ObtenerPorId(int id)
+        {
+            return postores.FirstOrDefault(p => p.Id == id);
+        }
+
+        public bool ActualizarNombre(Postor postor, string nuevoNombre)
+        {
+            postor.nombre = nuevoNombre;
+            return true;
+        }
+        public bool Actualizarcorreo(Postor postor, string nuevocorreo)
+        {
+            postor.correo = nuevocorreo;
+            return true;
+        }
+        public void Agregar(Postor postor)
+        {
+            postor.Id = siguienteId++;
+            postores.Add(postor);
+        }
+
+        public void EliminarPorId(int idSeleccionado)
+        {
+            int indice = -1;
+            for (int i = 0; i < postores.Count; i++)
             {
-                existente.Nombre = postor.Nombre;
-                existente.Email = postor.Email;
+                if (postores[i].Id == idSeleccionado)
+                {
+                    indice = i;
+                    break;
+                }
+            }
+            if (indice >= 0)
+            {
+                postores.RemoveAt(indice);
             }
         }
 
-        public void EliminarPostor(int dni)
-        {
-            var postor = postores.FirstOrDefault(p => p.Dni == dni);
-            if (postor != null)
-                postores.Remove(postor);
-        }
     }
+
 }

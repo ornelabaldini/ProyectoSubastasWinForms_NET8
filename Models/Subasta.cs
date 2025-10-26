@@ -7,13 +7,14 @@ namespace ProyectoSubastasWinForms_NET8.Models
 {
     public class Subasta
     {
-        public int Id { get; set; }
-        public double PujaInicial { get; set; }
-        public double PujaAumento { get; set; }
-        public string Articulo { get; set; }
-        public string Subastador { get; set; }
+        internal int Id { get; set; }
+        public decimal PujaInicial;
+        public decimal montoActual { get; }
+        public decimal PujaAumento { get; set; }
+        Articulo Articulo { get; set; }
+        Subastador Subastador { get; set; }
         public DateTime FechaHoraInicio { get; set; }
-        public int DuracionMinutos { get; set; }
+        readonly Timespan Duracion { get; set; }
         public SubastaEstado Estado { get; private set; }
         public List<Postor> Postores { get; set; } = new List<Postor>();
         public Postor Ganador { get; set; }
@@ -26,14 +27,44 @@ namespace ProyectoSubastasWinForms_NET8.Models
             Subastador = subastador;
             PujaInicial = pujaInicial;
             PujaAumento = pujaAumento;
-            Duracion = duracion;
+            Duracion = TimeSpan.FromHours(24);
             Estado = SubastaEstado.Programada;
             Postores = new List<Postor>();
+            this.montoActual = montoActual;
+            this.Ganador = null;
         }
-          
+        
+        //Propiedades condicionales
+
+        public decimal PujaInicial
+        {
+            get { return pujaInicial; }
+            set
+            {
+                if (value < 1000 || value % 1000 != 0)
+                    throw new ArgumentException("La puja inicial debe ser mayor o igual a 500.");
+                pujaInicial = value;
+            }
+        }
+
+          public decimal PujaAumento
+        {
+            get { return pujaAumento; }
+            set
+            {
+                if (value <= 0)
+                    throw new ArgumentException("La puja de aumento debe ser mayor a cero.");
+                pujaDeAumento = value;
+            }
+        }
+
+        //Fin propiedades
+
+        //Metodos 
+
         public void Iniciar()
         {
-            if (Estado != SubastaEstado.Pendiente)
+            if (Estado != SubastaEstado.Programada)
                 throw new InvalidOperationException("La subasta ya fue iniciada o finalizada.");
 
             Estado = SubastaEstado.EnCurso;
