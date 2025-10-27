@@ -20,9 +20,12 @@ namespace ProyectoSubastasWinForms_NET8.Services
 
         public bool RegistrarSubasta(Subasta nuevaSubasta)
         {
+
             if (nuevaSubasta == null || nuevaSubasta.ArticuloPorSubastar == null || nuevaSubasta.Subastador == null)
                 return false;
-
+            if (nuevaSubasta.getPrecioBase < 0)
+                throw new ArgumentException("La puja inicial debe ser mayor a 0");
+            
             repository.Agregar(nuevaSubasta); 
             return true;
         }

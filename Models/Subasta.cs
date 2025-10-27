@@ -7,46 +7,42 @@ namespace ProyectoSubastasWinForms_NET8.Models
 {
     public class Subasta
     {
-        internal int Id { get; set; }
-        public decimal PujaInicial;
-        public decimal montoActual { get; }
-        public decimal PujaAumento { get; set; }
-        Articulo Articulo { get; set; }
-        Subastador Subastador { get; set; }
-        public DateTime FechaHoraInicio { get; set; }
-        readonly Timespan Duracion { get; set; }
-        public SubastaEstado Estado { get; private set; }
-        public List<Postor> Postores { get; set; } = new List<Postor>();
-        public Postor Ganador { get; set; }
+        private int Id { get; set; }
+        private decimal precioBase { get; set; }
+        private decimal montoActual { get; }
+        private decimal pujaAumento { get; set; }
+        private Articulo articulo { get; set; }
+        private Subastador subastador { get; set; }
+        private DateTime fechaHoraInicio { get; set; }
+        private readonly TimeSpan duracion { get; set; }
+        private SubastaEstado estado { get; set; }
+        private List<Postor> postores { get; set; } = new List<Postor>();
+        private Postor ganador { get; set; }
+        private contadorPujas  int { get; set; } = 0;
+    
 
-
-        public Subasta(int id, string articulo, string subastador, decimal pujaInicial, decimal pujaAumento, TimeSpan duracion)
+        public Subasta(int id, string articulo, string subastador, decimal precioBase, decimal pujaAumento, TimeSpan duracion)
         {
             Id = id;
             Articulo = articulo;
             Subastador = subastador;
-            PujaInicial = pujaInicial;
+            precioBase = precioBase;
             PujaAumento = pujaAumento;
             Duracion = TimeSpan.FromHours(24);
             Estado = SubastaEstado.Programada;
             Postores = new List<Postor>();
-            this.montoActual = montoActual;
-            this.Ganador = null;
+            MontoActual = montoActual;
+            Ganador = null;
+            contadorPujas = 0;
         }
         
-        //Propiedades condicionales
-
-        public decimal PujaInicial
-        {
-            get { return pujaInicial; }
-            set
-            {
-                if (value < 1000 || value % 1000 != 0)
-                    throw new ArgumentException("La puja inicial debe ser mayor o igual a 500.");
-                pujaInicial = value;
-            }
+        public decimal getPrecioBase(){
+            return precioBase;
         }
 
+        public decimal setPrecioBase(decimal precioBase){
+            this.precioBase = precioBase;
+        }
           public decimal PujaAumento
         {
             get { return pujaAumento; }
@@ -57,8 +53,6 @@ namespace ProyectoSubastasWinForms_NET8.Models
                 pujaDeAumento = value;
             }
         }
-
-        //Fin propiedades
 
         //Metodos 
 
@@ -108,7 +102,7 @@ namespace ProyectoSubastasWinForms_NET8.Models
         public decimal ObtenerPujaActual()
         {
             var ganadora = CalcularGanador();
-            return ganadora?.Monto ?? PujaInicial;
+            return ganadora?.Monto ?? precioBase;
         }
 
         public Postor ObtenerPostorGanador()
@@ -118,7 +112,7 @@ namespace ProyectoSubastasWinForms_NET8.Models
 
         public override string ToString()
         {
-            return $"ID: {Id} | Artículo: {Articulo} | Subastador: {Subastador} | Puja inicial: ${PujaInicial:0.00} | Estado: {Estado}";
+            return $"ID: {Id} | Artículo: {Articulo} | Subastador: {Subastador} | Puja inicial: ${precioBase:0.00} | Estado: {Estado}";
         }
 
         public void ActualizarEstado(DateTime fechaActual)
@@ -128,5 +122,7 @@ namespace ProyectoSubastasWinForms_NET8.Models
                 Finalizar();
             }
         }
+
+        //+ IncrementarContadorPuja(): void
     }
 }
