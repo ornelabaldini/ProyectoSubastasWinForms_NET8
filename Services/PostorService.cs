@@ -2,16 +2,20 @@
 using ProyectoSubastasWinForms_NET8.Repository;
 using System.Collections.Generic;
 
+//Inicio de la clase PostorService
+
 namespace ProyectoSubastasWinForms_NET8.Services
 {
+    //Constructores
     public class PostorService
     {
         private readonly PostorRepository repository;
-        public PostorService() 
-        { 
+        public PostorService()
+        {
             repository = new PostorRepository();
         }
-        
+
+        // Registrar un nuevo postor
         public bool RegistrarPostor(Postor nuevoPostor)
         {
             Postor existente = repository.ObtenerPorId(nuevoPostor.Id);
@@ -22,15 +26,20 @@ namespace ProyectoSubastasWinForms_NET8.Services
             repository.Agregar(nuevoPostor);
             return true;
         }
+
+        // Obtener un postor por su ID
         public Postor ObtenerPostor(int id)
         {
             return repository.ObtenerPorId(id);
         }
+
+        // Obtener todos los postores registrados
         public List<Postor> ObtenerTodos()
         {
             return repository.ObtenerTodos();
         }
 
+        // Eliminar un postor por su ID
         public bool EliminarPostor(int idSeleccionado)
         {
             Postor existente = repository.ObtenerPorId(idSeleccionado);
@@ -41,27 +50,31 @@ namespace ProyectoSubastasWinForms_NET8.Services
             return true;
         }
 
-        public bool ModificarNombrePostor(int id, string nuevoNombre)
+        // Modificar A de un postor existente
+        public bool ModificarApellidoPostor(int id, string nuevoApellido)
         {
             var postor = repository.ObtenerPorId(id);
             if (postor == null) return false;
 
-            if (string.IsNullOrWhiteSpace(nuevoNombre))
-                throw new ArgumentException("El nombre no puede estar vacío.");
+            if (string.IsNullOrWhiteSpace(nuevoApellido)) // Validar que el nuevo apellido no esté vacío
+                throw new ArgumentException("El Apellido no puede estar vacío.");
 
-            return repository.ActualizarNombre(postor, nuevoNombre);
+            return repository.Actualizarapellido(postor, nuevoApellido);
         }
+
+        // Modificar el correo de un postor existente
         public bool ModificarcorreoPostor(int id, string nuevocorreo)
         {
             var postor = repository.ObtenerPorId(id);
-            if (postor == null) return false;
+            if (postor == null) return false; // Verificar si el postor existe
 
             if (string.IsNullOrWhiteSpace(nuevocorreo))
-                throw new ArgumentException("El nombre no puede estar vacío.");
+                throw new ArgumentException("El apellido no puede estar vacío.");
 
             return repository.Actualizarcorreo(postor, nuevocorreo);
         }
 
+        // Obtener un postor por su ID (método adicional)
         public Postor ObtenerPorId(int id)
         {
             return repository.ObtenerPorId(id);
@@ -69,3 +82,4 @@ namespace ProyectoSubastasWinForms_NET8.Services
 
     }
 }
+//Fin de la clase PostorService

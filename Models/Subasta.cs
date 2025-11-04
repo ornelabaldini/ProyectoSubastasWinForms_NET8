@@ -7,20 +7,21 @@ namespace ProyectoSubastasWinForms_NET8.Models
 {
     public class Subasta
     {
-        private int Id { get; set; }
-        private decimal precioBase { get; set; }
+        private int Id { get; set; } //
+        private decimal precioBase { get; set; } 
         private decimal montoActual { get; }
         private decimal pujaAumento { get; set; }
-        private Articulo articulo { get; set; }
-        private Subastador subastador { get; set; }
+
         private DateTime fechaHoraInicio { get; set; }
         private readonly TimeSpan duracion { get; set; }
-        private SubastaEstado estado { get; set; }
-        private List<Postor> postores { get; set; } = new List<Postor>();
-        private Postor ganador { get; set; }
-        private contadorPujas  int { get; set; } = 0;
-    
+        private int contadorPujas { get; set; } = 0;
+        SubastaEstado estado { get; set; }
+        Postor ganador { get; set; }
+        Articulo articulo { get; set; }
+        Subastador subastador { get; set; }
+        List<Postor> postores { get; set; } = new List<Postor>();
 
+        // constructores
         public Subasta(int id, string articulo, string subastador, decimal precioBase, decimal pujaAumento, TimeSpan duracion)
         {
             Id = id;
@@ -28,7 +29,7 @@ namespace ProyectoSubastasWinForms_NET8.Models
             Subastador = subastador;
             precioBase = precioBase;
             PujaAumento = pujaAumento;
-            Duracion = TimeSpan.FromHours(24);
+            Duracion = TimeSpan.FromHours(24); // Duracion fija de 24 horas
             Estado = SubastaEstado.Programada;
             Postores = new List<Postor>();
             MontoActual = montoActual;
@@ -36,13 +37,27 @@ namespace ProyectoSubastasWinForms_NET8.Models
             contadorPujas = 0;
         }
         
-        public decimal getPrecioBase(){
-            return precioBase;
+        // Propiedades
+
+        public int IdSubasta
+        {
+            get { return Id; }
+            set { Id = value; } // Agregar validaciones si es necesario
         }
 
-        public decimal setPrecioBase(decimal precioBase){
-            this.precioBase = precioBase;
+        public decimal PujaInicial
+        {
+            get => pujaInicial;
+            set
+            {
+                bool esInvalida = value < 1000 || value % 1000 != 0;
+                if (esInvalida)
+                    throw new ArgumentException("La puja inicial debe ser múltiplo de 1000 y mayor o igual a 1000."); // Validación
+
+                pujaInicial = value;
+            }
         }
+
           public decimal PujaAumento
         {
             get { return pujaAumento; }

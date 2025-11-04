@@ -7,7 +7,7 @@ namespace ProyectoSubastasWinForms_NET8.Controllers
 
     public class PostorController
     {
-        private readonly PostorService service;
+        private readonly PostorService service; //// Servicio de Postor usado por la clase, inicializado solo una vez (readonly)
 
         public PostorController()
         {
@@ -24,11 +24,10 @@ namespace ProyectoSubastasWinForms_NET8.Controllers
             return service.ObtenerPostor(id);
         }
 
-        public bool AgregarPostor(string correo, string nombre)
+        public bool AgregarPostor(string correo, string apellido)
         {
-            Postor postor = new Postor(correo, nombre);
+            Postor postor = new Postor(correo, apellido);
             postor.correo = correo;
-            postor.nombre = nombre;
             return service.RegistrarPostor(postor);
         }
         public bool Pujar(int numeroSubasta, int idPostor)
@@ -45,13 +44,13 @@ namespace ProyectoSubastasWinForms_NET8.Controllers
             return service.EliminarPostor(idSeleccionado);
         }
 
-        public bool ModificarNombrePostor(int id, string nuevoNombre)
+        public bool ModificarApellidoPostor(int id, string nuevoApellido)
         {
-            return service.ModificarNombrePostor(id, nuevoNombre);
+            return service.ModificarApellidoPostor(id, nuevoApellido);
         }
-        public bool ModificarcorreoPostor(int id, string nuevoMail)
+        public bool ModificarcorreoPostor(int id, string nuevoCorreo)
         {
-            return service.ModificarcorreoPostor(id, nuevoMail);
+            return service.ModificarcorreoPostor(id, nuevoCorreo);
         }
 
         public List<Subasta> ObtenerSubastas()

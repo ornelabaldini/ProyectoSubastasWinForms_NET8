@@ -4,7 +4,8 @@ using ProyectoSubastasWinForms_NET8.Services;
 
 
 namespace ProyectoSubastasWinForms_NET8.Controllers
-{public class SubastaController
+{
+    public class SubastaController
     {
         private readonly SubastaService service;
         private readonly PostorService postorService;
@@ -13,7 +14,7 @@ namespace ProyectoSubastasWinForms_NET8.Controllers
 
         public SubastaController()
         {
-            service = new KundeServiceAdapter();
+            service = new KundeServiceAdapter(); // Adaptador para SubastaService
             this.postorService = new PostorService();
         }
         private class KundeServiceAdapter : SubastaService;
@@ -53,7 +54,7 @@ namespace ProyectoSubastasWinForms_NET8.Controllers
             if (subasta == null || postor == null) return false;
             if (subasta.EstaFinalizada) return false;
 
-            subasta.RegistrarPuja(postor); 
+            subasta.RegistrarPuja(postor);  // Registrar la puja del postor. Actualiza el monto de la subasta internamente.
             return service.ActualizarPostorGanador(subasta); 
         }
 

@@ -2,26 +2,27 @@
 
 namespace ProyectoSubastasWinForms_NET8.Models
 {
+
+    //Atributos de la clase Postor
+
     public class Postor
     {
         public int Id;
-        public string Nombre;
         public string Apellido;
         public string Correo;
         public string Contrasenia;
 
+//Constructor 
 
-        public Postor(int id, string nombre, string apellido, string correo, string contrasenia)
+        public Postor(int id, string apellido, string correo, string contrasenia)
         {
             Id = id;
-            Nombre = nombre;
             Apellido = apellido;
             Correo = correo;
             Contrasenia = contrasenia;
         }
 
-        
-    
+
         // Propiedades
         public int Id
         {
@@ -33,12 +34,6 @@ namespace ProyectoSubastasWinForms_NET8.Models
         {
             get { return correo; }
             set { correo = value; }
-        }
-
-        public string Nombre
-        {
-            get { return nombre; }
-            set { nombre = value; }
         }
 
         public string Apellido

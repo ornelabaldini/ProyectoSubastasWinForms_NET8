@@ -18,12 +18,12 @@ namespace ProyectoSubastasWinForms_NET8.Repository
         }
         public Postor ObtenerPorId(int id)
         {
-            return postores.FirstOrDefault(p => p.Id == id);
+            return postores.FirstOrDefault(p => p.Id == id); // Devuelve null si no se encuentra
         }
 
-        public bool ActualizarNombre(Postor postor, string nuevoNombre)
+        public bool ActualizarApellido(Postor postor, string nuevoApellido)
         {
-            postor.nombre = nuevoNombre;
+            postor.apellido = nuevoApellido;
             return true;
         }
         public bool Actualizarcorreo(Postor postor, string nuevocorreo)
@@ -33,16 +33,18 @@ namespace ProyectoSubastasWinForms_NET8.Repository
         }
         public void Agregar(Postor postor)
         {
-            postor.Id = siguienteId++;
+            postor.Id = siguienteId++; // Asigna el Id y luego incrementa para el siguiente
             postores.Add(postor);
         }
 
+// Eliminar un postor por su Id
         public void EliminarPorId(int idSeleccionado)
         {
             int indice = -1;
-            for (int i = 0; i < postores.Count; i++)
+            for (int i = 0; i < postores.Count; i++) // Bucle para encontrar el índice del postor con el Id dado
             {
-                if (postores[i].Id == idSeleccionado)
+                // Comparar el Id del postor en la posición i con el idSeleccionado
+                if (postores[i].Id == idSeleccionado) 
                 {
                     indice = i;
                     break;
@@ -50,7 +52,7 @@ namespace ProyectoSubastasWinForms_NET8.Repository
             }
             if (indice >= 0)
             {
-                postores.RemoveAt(indice);
+                postores.RemoveAt(indice); // Eliminar el postor en el índice encontrado
             }
         }
 

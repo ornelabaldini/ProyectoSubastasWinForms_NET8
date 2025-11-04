@@ -9,9 +9,9 @@ namespace ProyectoSubastasWinForms_NET8.Services
     public class SubastaService
     {
         private readonly SubastaRepository repository;
-        public SubastaService() 
+        public SubastaService() // Constructor
         {
-            repository = new SubastaRepository();
+            repository = new SubastaRepository(); // Instancia del repositorio
         }
         public Subasta ObtenerPoridSubasta(int idSubasta)
         {
@@ -21,7 +21,7 @@ namespace ProyectoSubastasWinForms_NET8.Services
         public bool RegistrarSubasta(Subasta nuevaSubasta)
         {
 
-            if (nuevaSubasta == null || nuevaSubasta.ArticuloPorSubastar == null || nuevaSubasta.Subastador == null)
+            if (nuevaSubasta == null || nuevaSubasta.ArticuloPorSubastar == null || nuevaSubasta.Subastador == null) // Validar que no sea nulo el articulo y subastador
                 return false;
             if (nuevaSubasta.getPrecioBase < 0)
                 throw new ArgumentException("La puja inicial debe ser mayor a 0");
@@ -30,7 +30,7 @@ namespace ProyectoSubastasWinForms_NET8.Services
             return true;
         }
 
-        public List<Subasta> ObtenerSubastas() 
+        public List<Subasta> ObtenerSubastas() // Listar todas las subastas que esta en el repositorio
         {
             return repository.ObtenerTodos();
         }
@@ -67,7 +67,7 @@ namespace ProyectoSubastasWinForms_NET8.Services
         }
 
         
-        public Subasta ObtenerPorid(int idSubasta)
+        public Subasta ObtenerPorid(int idSubasta) // Listar todas las subastas que esta en el repositorio
         {
             return repository.ObtenerPoridSubasta(idSubasta);
         }
